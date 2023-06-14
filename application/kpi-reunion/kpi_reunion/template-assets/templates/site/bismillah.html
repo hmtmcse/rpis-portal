@@ -1,7 +1,7 @@
 {% extends "layout/site-base.html" %}
 
 {% block title %}
-    স্টুডেন্ট পোর্টাল | রংপুর পলিটেকনিক ইনস্টিটিউট
+     শিক্ষার্থী পোর্টাল | রংপুর পলিটেকনিক ইনস্টিটিউট
 {% endblock %}
 
 {% block content %}
@@ -14,12 +14,12 @@
                         <h1>শিক্ষার্থী পোর্টাল </h1>
                         <h2 class="mb-3 text-h2">রংপুর পলিটেকনিক ইনস্টিটিউট</h2>
                         <p class="text-white text-justify me-3">
-                            "এসো মিলি শেকড়ের টানে ভ্রাতৃত্বের বন্ধনে " এই স্লোগানকে সামনে রেখে বন্ধুদের সাথে কাটানো
-                            স্মৃতিগুলোকে পুনরুজ্জীবিত করতে চলুন ফিরে আসি আর একবার আমাদের প্রিয় ক্যাম্পাসে।
-                            আসন্ন ঈদকে আরোও স্মৃতিমধুর ও আনন্দময় করতে ঈদের ৩য় দিনে একসাথে সবাই মিলে থাকবো সারাদিন আমাদের
-                            প্রাণের ক্যাম্পাস কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউটে।
-                            তাই আর দেরি না করে আজই আপনি নিজে রেজিষ্ট্রেশন করুন এবং আপনার সহপাঠীদেরকে রেজিষ্ট্রেশন করাতে
-                            উদ্বুদ্ধ করুন।
+                            বাংলাদেশের উত্তরের জনপদের অন্যতম শিক্ষায়তন-"রংপুর পলিটেকনিক ইন্সটিটিউট"। অবিভক্ত বাংলার
+                            প্রাচীন শহর রংপুর , এ অঞ্চলের শিক্ষা বিস্তারে বৃটিশ ভারতে নানামুখি পদক্ষেপের অংশ হিসেবে
+                            কারিগরি শিক্ষা প্রদানে আজকের রংপুর পলিটেকনিক ইন্সটিটিউট এর পদযাত্রা শুরু হয় ১৮৮২ সালে।
+                            রংপুর পলিটেকনিকের শিক্ষার্থীদের অংশগ্রহনে এবং তাদের একাডেমিক কার্যক্রম পরিচালনা করার জন্য
+                            আমরা নিয়ে এসেছি শিক্ষার্থী পোর্টাল, যা একাডেমিক, রেজিস্টার , শিক্ষার্থীদের কাজ কে অনেক সহজ
+                            করে তুলবে ।
                         </p>
                     </div>
 
@@ -41,14 +41,12 @@
                                     {% show_input field=form.bloodGroup, class="col-md-4" %}
                                     {% show_input field=form.technology, class="col-md-4" %}
 
-                                    {% show_input field=form.session, class="col-md-4" %}
-                                    {% show_input field=form.shift, class="col-md-4" %}
-                                    {% show_input field=form.passingYear, class="col-md-4" %}
+                                    {% show_input field=form.session, class="col-md-6" %}
+                                    {% show_input field=form.shift, class="col-md-6" %}
 
-                                    {% show_input field=form.presentAddress, class="col-md-6" %}
-                                    {% show_input field=form.permanentAddress, class="col-md-6" %}
-                                    {% show_input field=form.jobDetails, class="col-md-6" %}
-                                    {% show_input field=form.jobAddress, class="col-md-6" %}
+{#                                    {% show_input field=form.roll, class="col-md-4" %}#}
+{#                                    {% show_input field=form.registration, class="col-md-4" %}#}
+                                    {% show_input field=form.passingYear, class="col-md-4" %}
 
                                     {{- tutil.recaptcha()|safe }}
 
@@ -81,14 +79,6 @@
                             <iframe src="https://www.youtube.com/embed/Veb_lQZA1_s" title="রংপুর পলিটেকনিক ইনস্টিটিউট - প্রথম পুনর্মিলনী ২০২৩" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                         </div>
                     </div>
-{#                    <div class="col col-sm-100">#}
-{#                        <div class="text-center fs-2 fs-sm-3 bangla-text">#}
-{#                            কম্পিউটার থেকে রেজিস্ট্রেশন#}
-{#                        </div>#}
-{#                        <div class="registration-video card">#}
-{#                            <iframe src="https://www.youtube.com/embed/fXlI8vB2RYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>#}
-{#                        </div>#}
-{#                    </div>#}
                 </div>
             </div>
             <!-- end of .container-->
