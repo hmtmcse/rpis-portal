@@ -19,8 +19,8 @@
     <script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.js') }}"></script>
     {{- util.set_base_js()|safe }}
 
-    <meta property="og:title" content="প্রথম পুনর্মিলনী ২০২৩"/>
-    <meta property="og:description" content="রংপুর পলিটেকনিক ইনস্টিটিউট, ্রথম পুনর্মিলনী ২০২৩"/>
+    <meta property="og:title" content="রংপুর পলিটেকনিক ইনস্টিটিউট শিক্ষার্থী পোর্টাল"/>
+    <meta property="og:description" content="রংপুর পলিটেকনিক ইনস্টিটিউট"/>
     <meta property="og:image" content="{{- tutil.base_url + url_for('kpi-reunion.static', filename='img/kpi-reunion-logo.png') }}"/>
 </head>
 <body>
@@ -29,7 +29,7 @@
         <header class="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top bg-pf-primary">
             <nav class="container-fluid bd-gutter flex-wrap flex-lg-nowrap px-md-5 px-3">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="{{ url_for('kpi-reunion.static', filename='img/kpi-logo.jpg') }}" class="bf-logo" alt="Logo">
+                    <img src="{{ url_for('kpi-reunion.static', filename='img/logo.jpg') }}" class="bf-logo" alt="Logo">
                     <div class="logo px-2 fw-normal fs-2 text-white mb-0">রংপুর পলিটেকনিক ইনস্টিটিউট</div>
                 </a>
                 <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas"
@@ -80,19 +80,12 @@
                 <div class="col-lg-6 me-md-auto mb-3">
                     <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none logo-dark-white"
                        href="#">
-                        <img src="{{ url_for('kpi-reunion.static', filename='img/kpi-logo.jpg') }}" height="60px"
+                        <img src="{{ url_for('kpi-reunion.static', filename='img/logo.png') }}" height="60px"
                              alt="Logo">
                         <h2 class="logo px-2 fw-bold fs-3 mb-0 ">রংপুর পলিটেকনিক ইনস্টিটিউট</h2>
                     </a>
                     <p>‘যেথায় থাকি, যে যেখানে, বাঁধন আছে প্রাণে প্রাণে।‘ কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউটের সকল ছাত্র
                         ছাত্রীদের অংশগ্রহনে প্রথম পুনর্মিলনী আয়োজন সফল করতে এগিয়ে আসুন ।</p>
-
-                    <p class="mb-0">
-                        <strong class="me-2">স্থানঃ </strong>কুড়িগ্রাম পলিটেকনিক ইন্সটিটিউট, কুড়িগ্রাম।
-                    </p>
-                    <p>
-                        <strong class="me-2">সময়ঃ </strong>ঈদের ৩য় দিন
-                    </p>
                 </div>
 
                 <div class="col-6 col-lg-3 mb-3">
@@ -102,7 +95,7 @@
                             <a href="{{ url_for("site_controller.registration") }}">রেজিস্ট্রেশন</a>
                         </li>
                         <li class="mb-2">
-                            <a target="_blank" href="https://kpik.gov.bd/">কুড়িগ্রাম পলিটেকনিক ওয়েবসাইট</a>
+                            <a target="_blank" href="https://www.rpir.gov.bd/">রংপুর পলিটেকনিক ওয়েবসাইট</a>
                         </li>
                         <li class="mb-2">
                             <a href="https://banglafighter.com/" target="_blank">বাংলা ফাইটার এডুকেশন</a>
@@ -115,7 +108,7 @@
             <div class="me-md-auto text-center text-md-start">
                 <div class="copyright">
                     <span>Developed by
-                        <strong><a class="text-color-primary" href="https://banglafighter.com/" target="_blank">Bangla Fighter.</a></strong>
+                        <strong><span class="ms-1" >RPIR CMT 7th</span></strong>
                     </span>
                 </div>
             </div>
