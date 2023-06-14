@@ -5,10 +5,10 @@ from pf_flask_auth.model.pffa_abstract_model import OperatorAbstract
 
 
 class Config:
-    APP_NAME = "KPI Reunion"
-    PORT: int = 1511
+    APP_NAME = "RPI Portal"
+    PORT: int = 1911
 
-    SECRET_KEY: str = 'kpi_reunion_secret_key_base'
+    SECRET_KEY: str = 'rpi_portal_secret_key_base'
 
     ENABLE_AUTH_SYSTEM: bool = True
     LOGIN_IDENTIFIER: str = "username"

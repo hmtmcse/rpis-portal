@@ -33,5 +33,3 @@ dependencies:
   - url: https://gitlab.com/pfbl/bl-core-ui.git
 before_end:
 - python pweb_cli.py develop
-- npm install -g yarn
-- yarn install
