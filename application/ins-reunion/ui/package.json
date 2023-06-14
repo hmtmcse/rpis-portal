@@ -1,0 +1,36 @@
+{
+  "name": "ins-reunion",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@pfo/pf-react": "^1.0.0",
+    "@pfo/pf-pweb-react": "^1.0.0",
+    "@pfo/pf-react-boot": "^1.0.0",
+    "@bl/core-ui": "^1.0.0",
+    "@pfo/pf-pweb-i18n": "^1.0.0",
+    "bl-identity-acl": "^1.0.0"
+  },
+  "scripts": {
+    "start-app": "webpack-dev-server --env pfen=local",
+    "dev-build": "webpack --mode=production --env pfen=dev && firebase deploy -P dev",
+    "prod-build": "webpack --mode=production --env pfen=prod && firebase deploy -P prod"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "devDependencies": {
+    "dotenv-webpack": "^7.1.0",
+    "file-loader": "^6.2.0",
+    "css-loader": "^6.4.0",
+    "sass-loader": "^12.6.0",
+    "sass": "^1.49.9",
+    "html-webpack-plugin": "^5.4.0",
+    "style-loader": "^3.3.0",
+    "ts-loader": "^9.2.6",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  }
+}

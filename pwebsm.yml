@@ -1,0 +1,37 @@
+before_start:
+- git pull
+app_dependencies:
+- key: App
+  dir: application
+  branch: dev
+  mode:
+  - dev
+  run-py-script:
+  - setup.py develop
+dependencies:
+- key: PWeb
+  dir: dev-dependencies
+  branch: dev
+  mode:
+  - dev
+  repo:
+  - url: https://github.com/problemfighter/pf-flask-web.git
+    name: pf-flask-web
+  - url: https://gitlab.com/pfbl/bl-validator.git
+  - url: https://gitlab.com/pfbl/bl-3rdp-component.git
+  - url: https://gitlab.com/pfbl/region.git
+  - url: https://gitlab.com/pfbl/bl-common.git
+  - url: https://gitlab.com/pfbl/pf-messaging.git
+  setup-py: develop
+- key: PWebUI
+  dir: dev-dependencies/ui
+  branch: dev
+  mode:
+  - dev
+  repo:
+  - url: https://github.com/problemfighter/pf-react-bdash.git
+  - url: https://gitlab.com/pfbl/bl-core-ui.git
+before_end:
+- python pweb_cli.py develop
+- npm install -g yarn
+- yarn install

@@ -1,0 +1,146 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+   Report | Kurigram Polytechnic Institute
+{% endblock %}
+
+
+{% block content %}
+    <a href="{{- url_for("report_controller.download") }}" class="btn btn-primary mb-2">Download Report</a>
+    <div class="row report g-2">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Member Registration</h5>
+                    <table class="table">
+                        <tr>
+                            <th>Today's Registration</th>
+                            <td class="fw-bolder">{{- data.todayRegistration }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Registration</th>
+                            <td class="fw-bolder">{{- data.totalRegistration }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Event Booking</h5>
+                    <table class="table">
+                        <tr>
+                            <th>Today's Booking</th>
+                            <td class="fw-bolder">{{- data.todayBooking }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Booking</th>
+                            <td class="fw-bolder">{{- data.totalBooking }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Payment</h5>
+                    <table class="table">
+                        <tr>
+                            <th>Today's Paid</th>
+                            <td class="fw-bolder">{{- data.todayPaid }}</td>
+                        </tr>
+                        <tr>
+                            <th>Total Paid</th>
+                            <td class="fw-bolder">{{- data.totalPaid }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        {% set report = data.all_report %}
+
+        {% if report %}
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Participant</h5>
+                        <table class="table">
+                            <tr>
+                                <th>Total</th>
+                                <td class="fw-bolder">{{- report.totalParticipant }}</td>
+                            </tr>
+                            <tr>
+                                <th>Alumni</th>
+                                <td class="fw-bolder">{{- report.totalAlumni }}</td>
+                            </tr>
+                            <tr>
+                                <th>Guest</th>
+                                <td class="fw-bolder">{{- report.totalGuest }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">T-Shirt</h5>
+                        <table class="table">
+                            <tr>
+                                <th>M</th>
+                                <td class="fw-bolder">{{- report.M }}</td>
+                            </tr>
+                            <tr>
+                                <th>L</th>
+                                <td class="fw-bolder">{{- report.L }}</td>
+                            </tr>
+                            <tr>
+                                <th>XL</th>
+                                <td class="fw-bolder">{{- report.XL }}</td>
+                            </tr>
+                            <tr>
+                                <th>XXL</th>
+                                <td class="fw-bolder">{{- report.XXL }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+
+            {% for tech in ["Construction", "Computer", "Electronics", "AIDT", "Electrical", "Mechanical", "Civil"] %}
+                {% if report[tech] %}
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{- tech }}</h5>
+                                <table class="table">
+                                    <tr>
+                                        <th>Total Participant</th>
+                                        <td class="fw-bolder">{{- report[tech].participant }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Guest</th>
+                                        <td class="fw-bolder">{{- report[tech].withGuest }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}

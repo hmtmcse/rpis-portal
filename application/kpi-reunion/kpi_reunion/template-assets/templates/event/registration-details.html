@@ -1,0 +1,67 @@
+{% if not result %}
+    <h1 class="text-danger">Not found</h1>
+{% else %}
+    <br>
+    Name: {{ member.name }}
+    <br>
+    <br>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>Breakfast</th>
+            <td>{{ result.breakfast.size }}</td>
+            <td  class="my-td">
+                {% if result.breakfast.status == "" %}
+                    <button data-key="breakfast" data-qt="{{ result.breakfast.size }}" data-id="{{ event.id }}" type="button" class="btn btn-success">Done</button>
+                {% else %}
+                    Done
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Lunch</th>
+            <td>{{ result.lunch.size }}</td>
+            <td class="my-td">
+                {% if result.lunch.status == "" %}
+                    <button data-key="lunch" data-id="{{ event.id }}" data-qt="{{ result.lunch.size }}"  type="button" class="btn btn-success">Done</button>
+                {% else %}
+                    Done
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>Key Cap</th>
+            <td>{{ result.cap_key.size }}</td>
+            <td class="my-td">
+                {% if result.cap_key.status == "" %}
+                    <button type="button" data-id="{{ event.id }}" data-key="cap_key" data-qt="{{ result.cap_key.size }}"  class="btn btn-success">Done</button>
+                {% else %}
+                    Done
+                {% endif %}
+            </td>
+        </tr>
+        {% for details in tshirt %}
+            <tr>
+                <th>T-Shirt  >>> {{ result[details].size }}</th>
+                <td>1</td>
+                <td class="my-td">
+                    {% if result[details].status == "" %}
+                        <button data-id="{{ event.id }}" data-key="{{ details }}" data-qt="{{ result[details].size }}"  type="button" class="btn btn-success">Done</button>
+                    {% else %}
+                        Done
+                    {% endif %} 
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endif %}

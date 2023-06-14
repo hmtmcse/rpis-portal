@@ -1,0 +1,313 @@
+<style>
+    @page {
+        size: A4;
+        margin: 0mm;
+    }
+    .reunion-img {
+        text-align: center;
+        overflow: hidden;
+        height: 150px;
+        width: 150px;
+        border: 4px solid #e7e4e4;
+        margin: 0 auto;
+    }
+
+    .reunion-img .img-fluid {
+        object-fit: cover;
+        text-align: center;
+        height: 150px;
+        width: 150px;
+    }
+
+    .intro-sub {
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .qr-code img {
+        height: 150px;
+        width: auto;
+        border: 1px solid #e7e4e4;
+    }
+
+    .print-a4 {
+        width: 775px;
+        min-width: 774px;
+        box-sizing: border-box;
+        min-height: 320px;
+    }
+
+    .invitation-card {
+        border: 4px solid #000;
+        color: #000;
+        padding: 10px;
+        border-radius: 0;
+    }
+
+    .border-right {
+        border-right: 2px solid #e7e4e4;
+    }
+
+    .fs-dis {
+        font-size: 13px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .title-text {
+        font-size: 1.44rem;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 1.8rem;
+    }
+
+    .intro-name {
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .py-3 {
+        padding: 1rem 0;
+    }
+
+    .mar-x-1 {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .small-section {
+        flex: 0 0 auto;
+        width: 25%;
+    }
+
+    .big-section {
+        flex: 0 0 auto;
+        width: 50%;
+    }
+
+    .w-small {
+        flex: 0 0 auto;
+        width: 41.66666667%;
+    }
+
+    .w-big {
+        flex: 0 0 auto;
+        width: 58.33333333%;
+    }
+
+    .p-text {
+        margin-bottom: 3px;
+    }
+
+    .row-content {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .iv-content-center {
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        min-height: 290px;
+
+
+    }
+
+    .booking-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding-bottom: 0.5rem;
+    }
+
+    .details-title {
+        font-size: 1rem;
+        font-weight: bold;
+        margin-bottom: 0.25rem;
+        padding-bottom: 5px;
+    }
+
+    .mb-qr{
+        margin-bottom: 35px;
+    }
+    .reunion-logo img{
+        height: 150px;
+        width: auto;
+        object-fit: cover;
+    }
+
+    .mb-details{
+        margin-bottom: 20px;
+    }
+
+    .text-center{
+        text-align: center;
+    }
+
+    .id-card{
+        color: #000;
+        width: 220px;
+        height: 100%;
+        max-height: 420px;
+        margin: 40px auto 0;
+    }
+    .id-card .card{
+        border: 2px solid #323232;
+        position: relative;
+        border-radius: 5px;
+    }
+
+    .id-card .card-body {
+        padding: 16px;
+    }
+
+    .image-frame .img-frame {
+        height: 180px;
+        width: 196px;
+        position: absolute;
+        top: 16px;
+        left: 10px;
+        right: 10px;
+    }
+
+    .profile-img {
+        height: 177px;
+        width: 177px;
+        text-align: center;
+        object-fit: cover;
+    }
+
+    .qr-code-id{
+        height: 100px;
+        width: auto;
+    }
+
+    .intro .intro-name{
+        margin-bottom: 0;
+    }
+
+    .intro .intro-sub {
+        font-size: 12px;
+    }
+    .overflow-x-auto{
+        overflow-x: auto;
+        height: 100%;
+    }
+
+    .id-card .pt-3{
+        padding-top: 1rem;
+    }
+
+    .qr-code-sear{
+        padding-top: 100px;
+        text-align: center;
+        font-size: 20px;
+        color: red;
+        font-weight: bold;
+    }
+    
+
+</style>
+
+<div class="overflow-x-auto mb-3">
+    <div class="col-xxl-9  print-a4 mx-auto">
+        <div class="card invitation-card">
+            <div class="card-body py-3">
+                <div class="title-text">কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউট পুনর্মিলনী - ২০২৩</div>
+                <div class="row-content mb-3">
+                    <div class="small-section border-right">
+                        <div class="iv-content-center">
+                            <div class="reunion-img mx-auto">
+                               <img src="{{ tutil.profile_photo_url if not download else tutil.base_url + tutil.profile_photo_url }}"
+                                     class="img-fluid" alt="Image">
+                            </div>
+
+                            <div class="py-3 text-center">
+                                <div class="intro-name">{{- tutil.session_data.name }}</div>
+                                <div class="intro-sub">টেকনোলজিঃ <span
+                                        class="ms-2">{{- tutil.session_data.otherFields.technology }}</span></div>
+                                <div class="intro-sub">সেশনঃ <span
+                                        class="ms-2">{{- tutil.session_data.otherFields.session }}</span></div>
+                                <div class="intro-sub">পাশের সালঃ <span class="ms-2">{{- tutil.session_data.otherFields.passingYear }}</span></div>
+                                <div class="intro-sub">রেফারেন্স কোডঃ <span class="ms-2">{{- event.referenceCode }}</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="big-section border-right">
+                        <div class="iv-content-center">
+                            <div class="text-center reunion-logo">
+                                <img src="{{ url_for('kpi-reunion.static', filename='img/kpi-reunion-logo.png') if not download else tutil.base_url + url_for('kpi-reunion.static', filename='img/kpi-reunion-logo.png') }}" alt="Reunion Logo">
+                            </div>
+
+                            <div class="row-content">
+                                <div class="w-small border-right">
+                                    <div class="mar-x-1">
+                                        <div class="booking-title">বুকিং এর তথ্য</div>
+                                        <div class="fs-dis">
+                                            <div class="p-text">মোট অংশগ্রহনকারীঃ {{ event.adult + event.child }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="w-big">
+                                    <div class="mar-x-1">
+                                        <div class="booking-title">অনুষ্ঠান সূচী</div>
+                                        <div class="fs-dis">
+                                            <div class="p-text">তারিখঃ ঈদের ৩য় দিন</div>
+                                            <div class="p-text">সময়ঃ সকাল ০৯.০০ - রাত ০৯.০০</div>
+                                            <div class="p-text">স্থানঃ কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউট</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-section">
+                        <div class="iv-content-center">
+                            <div class="text-center">
+                                <div class="qr-code mb-qr">
+                                    <img src="{{ tutil.qr_code_image if not download else tutil.base_url + tutil.qr_code_image }}" alt="qr-code">
+                                </div>
+
+                                <div class="text-center fs-dis mb-details">
+                                    <div class="details-title">বিস্তারিত জানতে:</div>
+                                    <div class="p-text">ফোন: +৮৮০ ১৭৫৬-৭০২৩৪০</div>
+                                    <div class="p-text">ইমেইল: reunionkpi@gmail.com</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="id-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="image-frame text-center">
+                    <img src="{{ url_for('kpi-reunion.static', filename='img/img-frame.png') if not download else tutil.base_url +  url_for('kpi-reunion.static', filename='img/img-frame.png') }}" alt="Reunion bg" class="img-frame">
+                    <img src="{{ tutil.profile_photo_url if not download else tutil.base_url + tutil.profile_photo_url }}" class="img-fluid profile-img" alt="Image">
+                </div>
+
+                <div class="pt-3 text-center intro">
+                    <div class="intro-name">{{- tutil.session_data.name }}</div>
+                    <div class="intro-sub">{{- tutil.session_data.otherFields.technology }}
+                        - <span class="ms-1">{{- tutil.session_data.otherFields.passingYear }}</span>
+                    </div>
+
+
+                    <img src="{{ tutil.qr_code_image if not download else tutil.base_url + tutil.qr_code_image }}" alt="qr-code" class="qr-code-id">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="qr-code-sear">
+        আপনার QR code / Invitation card কারো সাথে শেয়ার করবেন না ।
+    </div>
+
+</div>

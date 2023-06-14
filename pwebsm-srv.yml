@@ -1,0 +1,29 @@
+before_start:
+  - git pull
+app_dependencies:
+  - key: App
+    dir: application
+    branch: dev
+    mode:
+      - dev
+    run-py-script:
+      - setup.py develop
+
+dependencies:
+  - key: PWeb
+    dir: dev-dependencies
+    branch: dev
+    mode:
+      - dev
+    repo:
+      - url: https://github.com/problemfighter/pf-flask-web.git
+        name: pf-flask-web
+      - url: git@gitlab.com:pfbl/bl-validator.git
+      - url: git@gitlab.com:pfbl/bl-3rdp-component.git
+      - url: git@gitlab.com:pfbl/region.git
+      - url: git@gitlab.com:pfbl/bl-common.git
+      - url: git@gitlab.com:pfbl/pf-messaging.git
+    setup-py: develop
+
+before_end:
+  - python pweb_cli.py develop

@@ -1,0 +1,50 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+   Update Profile | Kurigram Polytechnic Institute
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="pt-3 pb-2 mb-2 border-bottom">
+        <div class="text-h4">Update Profile</div>
+    </div>
+
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <form class="needs-validation profile-form" method="post" action="{{- url_for(action) }}" noValidate>
+                <div class="row g-3">
+                    {% show_input field=form.id %}
+                    {% show_input field=form.name, class="col-md-6" %}
+                    {% show_input field=form.homeDistrict, class="col-md-6" %}
+                    {% show_input field=form.mobile, class="col-md-6" %}
+                    {% show_input field=form.email, class="col-md-6" %}
+
+                    {% show_input field=form.emergencyContact, class="col-md-4" %}
+                    {% show_input field=form.bloodGroup, class="col-md-4" %}
+                    {% show_input field=form.technology, class="col-md-4" %}
+
+                    {% show_input field=form.session, class="col-md-4" %}
+                    {% show_input field=form.shift, class="col-md-4" %}
+                    {% show_input field=form.passingYear, class="col-md-4" %}
+
+                    {% show_input field=form.presentAddress, class="col-md-6" %}
+                    {% show_input field=form.permanentAddress, class="col-md-6" %}
+                    {% show_input field=form.jobDetails, class="col-md-6" %}
+                    {% show_input field=form.jobAddress, class="col-md-6" %}
+
+                    <div class="mt-3 col-12">
+                        <span class="float-end">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                            <a href="{{- url_for("member_controller.profile") }}" class="btn btn-danger ms-2" type="button">Cancel</a>
+                        </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

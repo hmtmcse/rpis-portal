@@ -1,0 +1,226 @@
+{% extends "layout/site-base.html" %}
+
+{% block title %}
+   প্রথম পুনর্মিলনী ২০২৩ | কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউট
+{% endblock %}
+
+{% block content %}
+
+
+        <section id="hero">
+            <div class="container-fluid">
+                <div class="row d-flex align-items-center md-height-control px-md-5 px-3">
+                    <div class=" col-lg-6 py-3 pb-5 py-lg-0 mt-5 mt-lg-0 bangla-text">
+                        <h1>প্রথম পুনর্মিলনী ২০২৩</h1>
+                        <h2 class="mb-3 text-h2">কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউট</h2>
+                        <p class="text-white text-justify me-3">
+                            "এসো মিলি শেকড়ের টানে ভ্রাতৃত্বের বন্ধনে " এই স্লোগানকে সামনে রেখে বন্ধুদের সাথে কাটানো
+                            স্মৃতিগুলোকে পুনরুজ্জীবিত করতে চলুন ফিরে আসি আর একবার আমাদের প্রিয় ক্যাম্পাসে।
+                            আসন্ন ঈদকে আরোও স্মৃতিমধুর ও আনন্দময় করতে ঈদের ৩য় দিনে একসাথে সবাই মিলে থাকবো সারাদিন আমাদের
+                            প্রাণের ক্যাম্পাস কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউটে।
+                            তাই আর দেরি না করে আজই আপনি নিজে রেজিষ্ট্রেশন করুন এবং আপনার সহপাঠীদেরকে রেজিষ্ট্রেশন করাতে
+                            উদ্বুদ্ধ করুন।
+                        </p>
+                    </div>
+
+                    <div class="col-lg-6 mb-5 mb-lg-0" >
+                        <div class="card border-0 overflow-hidden mt-5 mb-5">
+                            <div class="card-body">
+                                <form class="row g-3 text-start needs-validation" novalidate method="post" action="{{- url_for(action) }}">
+                                    <div>
+                                          <p class="fw-bold text-center bangla-text fs-1"> রেজিস্ট্রেশন করুন </p>
+                                    </div>
+
+                                    {% show_input field=form.name, class="col-md-6" %}
+                                    {% show_input field=form.homeDistrict, class="col-md-6" %}
+                                    {% show_input field=form.mobile, class="col-md-4" %}
+                                    {% show_input field=form.password, class="col-md-4" %}
+                                    {% show_input field=form.email, class="col-md-4" %}
+
+                                    {% show_input field=form.emergencyContact, class="col-md-4" %}
+                                    {% show_input field=form.bloodGroup, class="col-md-4" %}
+                                    {% show_input field=form.technology, class="col-md-4" %}
+
+                                    {% show_input field=form.session, class="col-md-4" %}
+                                    {% show_input field=form.shift, class="col-md-4" %}
+                                    {% show_input field=form.passingYear, class="col-md-4" %}
+
+                                    {% show_input field=form.presentAddress, class="col-md-6" %}
+                                    {% show_input field=form.permanentAddress, class="col-md-6" %}
+                                    {% show_input field=form.jobDetails, class="col-md-6" %}
+                                    {% show_input field=form.jobAddress, class="col-md-6" %}
+
+                                    {{- tutil.recaptcha()|safe }}
+
+                                    <div class="text-center bangla-text">
+                                        <button class="btn btn-primary" type="submit">রেজিস্ট্রেশন</button>
+                                        <a href="{{ url_for("operator_form_controller.login") }}" class="btn btn-secondary" type="button">লগ ইন</a>
+                                    </div>
+                                    <div class="text-center">
+                                        পাসওয়ার্ড ভুলে গেছেন?
+                                        <a class="sm-d-block" href="{{- url_for("site_controller.reset_password") }}">রিসেট পাসওয়ার্ড</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+         <section class="section-bg">
+
+            <div class="container-fluid">
+                <div class="row g-0 justify-content-center text-center px-md-5 px-3 bangla-text">
+                    <div class="col-lg-8">
+                        <p class="fs-1 fw-bold fs-sm-3">রেজিস্ট্রেশনের শেষ তারিখঃ
+                            <span class="ms-md-2 mt-2 mt-md-0 sm-d-block text-primary">১০ এপ্রিল ২০২৩ ইং (সোমবার)</span>
+                        </p>
+                        <p class="fs-1 fw-bold fs-sm-3 text-danger">সকলের অনুরোধে রেজিস্ট্রেশনের বর্ধিত  শেষ তারিখঃ <br>
+                            <span class="ms-md-2 mt-2 mt-md-0 sm-d-block text-primary">১৩ এপ্রিল ২০২৩ ইং (বৃহস্পতিবার) রাত ১২ টা</span>
+                        </p>
+                        <p class="fs-1 fw-bold fs-sm-3">রেজিস্ট্রেশন ফিঃ
+                            <span class="ms-md-2 mt-2 mt-md-0 sm-d-block text-primary">৭৫০ টাকা (জন প্রতি)</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+        <section class="section-bg">
+
+            <div class="container-fluid">
+                <div class="row px-md-5 px-3 g-5 gx-sm-0 mx-auto">
+                    <div class="col col-sm-100">
+                        <div class="text-center fs-2 fs-sm-3 bangla-text">
+                             রেজিস্ট্রেশন টিউটোরিয়াল
+                        </div>
+                        <div class="registration-video card">
+                            <iframe src="https://www.youtube.com/embed/Veb_lQZA1_s" title="কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউট - প্রথম পুনর্মিলনী ২০২৩" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                        </div>
+                    </div>
+{#                    <div class="col col-sm-100">#}
+{#                        <div class="text-center fs-2 fs-sm-3 bangla-text">#}
+{#                            কম্পিউটার থেকে রেজিস্ট্রেশন#}
+{#                        </div>#}
+{#                        <div class="registration-video card">#}
+{#                            <iframe src="https://www.youtube.com/embed/fXlI8vB2RYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+            <!-- end of .container-->
+
+        </section>
+
+
+        <section class="section-bg">
+
+            <div class="container-fluid">
+                <div class="row justify-content-center text-center px-md-5 px-3 bangla-text">
+                    <div class="col-lg-8">
+                        <p class="fs-2 fs-sm-3">বিস্তারিত জানতে বা আপনার মুল্যবান মতামত জানাতে যোগাযোগ করুন </p>
+
+                        <div class="fs-md-2 fs-1">
+                            <a href="tel:+880 1731-935687"> +880 1731-935687</a>
+                            <span class="ms-2 sm-d-block">( Md.Atiqur Rahman ENT-10 )</span>
+                        </div>
+                        <div class="fs-md-2 fs-1">
+                            <a href="tel:+880 1734-676264"> +880 1734-676264</a>
+                            <span class="ms-2 sm-d-block">( Rezaul Karim Reza Al-Farazi  ENT-12 )</span>
+                        </div>
+
+                        <div class="fs-md-2 fs-1">
+                            <a href="tel:+880 1746-956526"> +880 1746-956526</a>
+                            <span class="ms-2 sm-d-block">( Shishir Sarker CMT-12 )</span>
+                        </div>
+
+                        <div class="fs-md-2 fs-1">
+                            <a  href="tel:+880 1756-702340"> +880 1756-702340</a>
+                            <span class="ms-2 sm-d-block">( Bangla Fighter )</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of .container-->
+
+        </section>
+
+        <section class="section-bg">
+            <div class="container-fluid">
+                <div class="row justify-content-center text-center px-md-5 px-3 bangla-text">
+                    <div class="col-lg-8">
+                        <p class="fs-2 fs-sm-4 text-dark mb-0">জানতে চাই</p>
+                        <p class="mb-3">আমরা কিছু সাধারণ প্রশ্ন পেয়েছি এবং আমরা নিচে সেগুলোর উত্তর দেওয়ার চেষ্টা করেছি।</p>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="accordion border-x border-top rounded" id="accordionFaq">
+                                    <div class="card shadow-none border-bottom rounded-bottom-0">
+                                        <div class="card-header p-0" id="faqAccordionHeading1">
+                                            <button class="accordion-button btn btn-link text-decoration-none d-block w-100 py-2 px-3 collapsed border-0 text-start" data-bs-toggle="collapse" data-bs-target="#collapseFaqAccordion1" aria-expanded="false">
+                                                <span class="fas fa-caret-right accordion-icon me-3" data-fa-transform="shrink-2"></span>
+                                                <span class="fw-medium font-sans-serif text-900">রেজিস্ট্রেশন ফি কত?</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse bg-light" id="collapseFaqAccordion1">
+                                            <div class="card-body text-left">
+                                                <p class="mb-0 text-left ps-4">রেজিস্ট্রেশন ফি মাত্র ৭৫০ টাকা (জন প্রতি) । </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow-none border-bottom rounded-bottom-0">
+                                        <div class="card-header p-0" id="faqAccordionHeading2">
+                                            <button class="accordion-button btn btn-link text-decoration-none d-block w-100 py-2 px-3 collapsed border-0 text-start" data-bs-toggle="collapse" data-bs-target="#collapseFaqAccordion2" aria-expanded="false">
+                                                <span class="fas fa-caret-right accordion-icon me-3" data-fa-transform="shrink-2"></span>
+                                                <span class="fw-medium font-sans-serif text-900">রেজিস্ট্রেশন এর শেষ তারিখ কবে?</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse bg-light" id="collapseFaqAccordion2">
+                                            <div class="card-body text-left">
+                                                <p class="mb-0 text-left ps-4">রেজিস্ট্রেশন এর শেষ তারিখ ১০ এপ্রিল ২০২৩ ইং (সোমবার) ।</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow-none border-bottom rounded-bottom-0">
+                                        <div class="card-header p-0" id="faqAccordionHeading3">
+                                            <button class="accordion-button btn btn-link text-decoration-none d-block w-100 py-2 px-3 collapsed border-0 text-start" data-bs-toggle="collapse" data-bs-target="#collapseFaqAccordion3" aria-expanded="false">
+                                                <span class="fas fa-caret-right accordion-icon me-3" data-fa-transform="shrink-2"></span>
+                                                <span class="fw-medium font-sans-serif text-900">পেমেন্ট ভেরিফাই হয় না কেন?</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse bg-light" id="collapseFaqAccordion3">
+                                            <div class="card-body text-left">
+                                                <p class="mb-0 text-left ps-4">পেমেন্ট ভেরিফাই সিস্টেম থেকে হয় , পেমেন্ট ভেরিফাই হতে ২-৩ ঘন্টা সময় নেয় ।</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow-none border-bottom rounded-bottom-0">
+                                        <div class="card-header p-0" id="faqAccordionHeading4">
+                                            <button class="accordion-button btn btn-link text-decoration-none d-block w-100 py-2 px-3 collapsed border-0 text-start" data-bs-toggle="collapse" data-bs-target="#collapseFaqAccordion4" aria-expanded="false">
+                                                <span class="fas fa-caret-right accordion-icon me-3" data-fa-transform="shrink-2"></span>
+                                                <span class="fw-medium font-sans-serif text-900">অনুষ্ঠান কোথায় হবে?</span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse bg-light" id="collapseFaqAccordion4">
+                                            <div class="card-body text-left">
+                                                <p class="mb-0 text-left ps-4">অনুষ্ঠান কুড়িগ্রাম পলিটেকনিক ইনস্টিটিউটে হবে।</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+{% endblock %}
