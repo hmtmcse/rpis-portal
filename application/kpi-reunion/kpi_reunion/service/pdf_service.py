@@ -1,9 +1,7 @@
 import os
-import pdfkit
-from weasyprint import HTML, CSS
+from weasyprint import HTML
 from kpi_reunion.common.kpir_assets_config import KPIRAssetsConfig
 from pf_py_file.pfpf_file_util import FileUtil
-from pf_py_file.pfpf_text_file_man import TextFileMan
 
 
 class PDFService:
