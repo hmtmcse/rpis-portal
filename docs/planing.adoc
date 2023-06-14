@@ -11,8 +11,32 @@
 * Protoyon Potro
 
 
+=== PreDefineService
+* Name
+* Status
+* identifier
+* prove
+* response
+* token
+* description
+
+=== MemberDefineService
+* ServicesName
+* Status
+* prove
+* response
+* token
+* description
+* paymentStatus
+
+
+
 == Payment
-* bKash
+* gateway
+* token
+* APIResponse
+* status
+* amount
 
 == Operation
 * Protoyon Potro (Print and pdf)
