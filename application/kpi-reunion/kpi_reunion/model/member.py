@@ -12,16 +12,15 @@ class Member(OperatorAbstract):
     technology = pweb_db.Column("technology", pweb_db.String(50))
     session = pweb_db.Column("session", pweb_db.String(50))
     shift = pweb_db.Column("shift", pweb_db.String(50))
-    passingYear = pweb_db.Column("passing_year", pweb_db.String(50))
+
+    roll = pweb_db.Column("roll", pweb_db.String(20))
+    registration = pweb_db.Column("registration", pweb_db.String(30))
+
+    passingYear = pweb_db.Column("passing_year", pweb_db.String(10))
     homeDistrict = pweb_db.Column("home_district", pweb_db.String(50))
     bloodGroup = pweb_db.Column("blood_group", pweb_db.String(50))
 
-    isKnown = pweb_db.Column("is_known", pweb_db.Boolean, default=False)
-
-    presentAddress = pweb_db.Column("present_address", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
-    permanentAddress = pweb_db.Column("permanent_address", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
-    jobDetails = pweb_db.Column("job_details", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
-    jobAddress = pweb_db.Column("job_address", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
+    status = pweb_db.Column("status", pweb_db.String(15))
 
     additionalDataJson = pweb_db.Column("additional_data_json", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
 
