@@ -1,12 +1,12 @@
 from marshmallow import fields, validates_schema, ValidationError
 from bl_common.common.CommonHelper import CommonHelper
 from bl_common.common.common_validation import CommonValidation
-from kpi_reunion.data.kpi_reunio_enum import MemberTypeEnum, BloodGroup, PassingYear, Technology, Shift
-from kpi_reunion.model.member import Member
 from pf_flask_auth.dto.default_dto import OperatorDTO
 from pf_flask_rest.form.pf_app_form_def import FormAppDef, FormBaseDef
 from pf_flask_rest_com.api_def import FileField
 from pf_flask_rest_com.common.pffrc_enum_helper import EnumField
+from rpi_portal.data.rpi_portal_enum import MemberTypeEnum, Technology, Shift, BloodGroup
+from rpi_portal.model.member import Member
 
 
 class MemberDetailsForm(FormAppDef):
@@ -138,7 +138,6 @@ class EventRegistrationForm(FormAppDef):
 
 class ResetPasswordBySMSForm(FormAppDef):
     mobile = fields.String(required=True, error_messages={"required": "Please enter mobile"})
-    passingYear = EnumField(PassingYear, required=True, error_messages={"required": "Please select passing year"}, selectOptionLabel="value", selectFirstEntry="Passing Year")
 
     @validates_schema
     def validates_schema(self, data, **kwargs):

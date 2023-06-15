@@ -1,7 +1,7 @@
-from kpi_reunion.dto.member_form import MemberDetailsDTO
-from kpi_reunion.model.member import Member
 from pf_flask_auth.dto.default_dto import OperatorDTO
 from pf_flask_auth.model.pffa_abstract_model import OperatorAbstract
+from rpi_portal.form.member_form import MemberDetailsDTO
+from rpi_portal.model.member import Member
 
 
 class Config:
