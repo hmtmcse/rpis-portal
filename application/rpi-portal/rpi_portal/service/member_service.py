@@ -102,7 +102,7 @@ class MemberService:
                     password = PyDataUtil.get_dict_value(form_data, "password")
                     self.operator_form_service.login_by_credential(username, password)
                     flash("Registration success", "success")
-                    return redirect(url_for("site_controller.event_booking"))
+                    return redirect(url_for("site_controller.registration_success"))
             else:
                 flash("Please check the validation errors", "error")
         return self.form_crud_helper.template_helper.render("site/bismillah", params=params, form=form)
@@ -164,9 +164,8 @@ class MemberService:
         return self.form_crud_helper.template_helper.render("auth/reset-password", params={"reset_done": reset_done}, form=form)
 
     def registration_success(self):
-        params = {"button": "Create", "action": "site_controller.registration"}
-        form = MemberRegistrationForm()
-        return self.form_crud_helper.form_create("site/registration-success", form, params=params, redirect_url=url_for("site_controller.bismillah"))
+        params = {}
+        return self.form_crud_helper.template_helper.render("site/registration-success", params=params)
 
     def support(self):
         params = {}

@@ -10,7 +10,7 @@ class Member(OperatorAbstract):
     mobile = pweb_db.Column("mobile", pweb_db.String(30))
     emergencyContact = pweb_db.Column("emergency_contact", pweb_db.String(50))
     technology = pweb_db.Column("technology", pweb_db.String(50))
-    session = pweb_db.Column("session", pweb_db.String(50))
+    academicSession = pweb_db.Column("academic_session", pweb_db.String(50))
     shift = pweb_db.Column("shift", pweb_db.String(50))
 
     roll = pweb_db.Column("roll", pweb_db.String(20))

@@ -48,3 +48,13 @@ class TemplateUtil:
             type(img)
             img.save(path)
         return f"/assets/qrcode/{file_name}"
+
+    @property
+    def session_dropdown_data(self):
+        start_year = 2000
+        select_options = []
+        for year in range(0, 23):
+            current_year = start_year + year
+            year = f"{current_year}-{current_year + 1}"
+            select_options.append(year)
+        return select_options

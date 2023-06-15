@@ -28,8 +28,7 @@ def reset_password():
 
 @site_controller.route("/registration-success", methods=['POST', 'GET'])
 def registration_success():
-    return redirect(url_for("site_controller.bismillah"))
-    # return member_service.registration_success()
+    return member_service.registration_success()
 
 
 @site_controller.route("/robots.txt", methods=['GET'])

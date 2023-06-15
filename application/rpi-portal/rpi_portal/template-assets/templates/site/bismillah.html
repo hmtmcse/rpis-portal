@@ -37,14 +37,27 @@
                                     {% show_input field=form.password, class="col-md-4" %}
                                     {% show_input field=form.email, class="col-md-4" %}
 
-                                    {% show_input field=form.username, class="col-md-6" %}
                                     {% show_input field=form.emergencyContact, class="col-md-6" %}
 
                                     {% show_input field=form.bloodGroup, class="col-md-6" %}
-                                    {% show_input field=form.technology, class="col-md-6" %}
 
-                                    {% show_input field=form.session, class="col-md-6" %}
-                                    {% show_input field=form.shift, class="col-md-6" %}
+
+                                    <div class="col-md-4">
+                                        <label class="form-label">
+                                            <span class="text-danger me-1">*</span>
+                                            Session
+                                        </label>
+                                        <select class="form-select" required name="academicSession">
+                                            <option value="" selected disabled>Select</option>
+                                        {{ form.academicSession }}
+                                            {% for select in tutil.session_dropdown_data %}
+                                                <option {{ "selected" if form.academicSession == select }} value="{{- select }}">{{- select }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+
+                                    {% show_input field=form.technology, class="col-md-4" %}
+                                    {% show_input field=form.shift, class="col-md-4" %}
 
                                     {% show_input field=form.roll, class="col-md-4" %}
                                     {% show_input field=form.registration, class="col-md-4" %}

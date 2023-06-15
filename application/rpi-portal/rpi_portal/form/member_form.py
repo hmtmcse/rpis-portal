@@ -75,7 +75,7 @@ class MemberRegistrationForm(FormAppDef):
     mobile = fields.String(required=True, error_messages={"required": "Please enter mobile"})
     emergencyContact = fields.String(allow_none=True)
     technology = EnumField(Technology, required=True, error_messages={"required": "Please select technology"}, selectOptionLabel="value", selectFirstEntry="Technology")
-    session = fields.String(required=True, error_messages={"required": "Please enter session"})
+    academicSession = fields.String(required=True, error_messages={"required": "Please enter session"}, type="select")
     shift = EnumField(Shift, required=True, error_messages={"required": "Please select shift"}, selectOptionLabel="value", selectFirstEntry="Shift")
 
     roll = fields.String(required=True, error_messages={"required": "Please enter roll number"})
