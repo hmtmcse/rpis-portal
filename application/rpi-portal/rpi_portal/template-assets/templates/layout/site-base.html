@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="{{ url_for('kpi-reunion.static', filename='css/lib/theme.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='css/lib/theme.css') }}" rel="stylesheet">
 
-    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/confirm/jquery-confirm.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2-bootstrap-5-theme.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='js/lib/confirm/jquery-confirm.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='js/lib/datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='js/lib/select2/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='js/lib/select2/select2-bootstrap-5-theme.min.css') }}" rel="stylesheet">
 
-    <link href="{{ url_for('kpi-reunion.static', filename='css/site-style.css') }}" rel="stylesheet">
+    <link href="{{ url_for('rpi-portal.static', filename='css/site-style.css') }}" rel="stylesheet">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('kpi-reunion.static', filename='img/favicon.ico') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('rpi-portal.static', filename='img/favicon.ico') }}">
 
     <title>{% block title %}{{- pweb_app_name }}{% endblock %}</title>
 
-    <script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.js') }}"></script>
+    <script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.js') }}"></script>
     {{- util.set_base_js()|safe }}
 
     <meta property="og:title" content="রংপুর পলিটেকনিক ইনস্টিটিউট শিক্ষার্থী পোর্টাল"/>
     <meta property="og:description" content="রংপুর পলিটেকনিক ইনস্টিটিউট"/>
-    <meta property="og:image" content="{{- tutil.base_url + url_for('kpi-reunion.static', filename='img/kpi-reunion-logo.png') }}"/>
+    <meta property="og:image" content="{{- tutil.base_url + url_for('rpi-portal.static', filename='img/logo.png') }}"/>
 </head>
 <body>
     <main>
@@ -29,7 +29,7 @@
         <header class="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top bg-pf-primary">
             <nav class="container-fluid bd-gutter flex-wrap flex-lg-nowrap px-md-5 px-3">
                 <a class="navbar-brand d-flex align-items-center" href="#">
-                    <img src="{{ url_for('kpi-reunion.static', filename='img/logo.jpg') }}" class="bf-logo" alt="Logo">
+                    <img src="{{ url_for('rpi-portal.static', filename='img/logo.jpg') }}" class="bf-logo" alt="Logo">
                     <div class="logo px-2 fw-normal fs-2 text-white mb-0">রংপুর পলিটেকনিক ইনস্টিটিউট</div>
                 </a>
                 <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas"
@@ -80,7 +80,7 @@
                 <div class="col-lg-6 me-md-auto mb-3">
                     <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none logo-dark-white"
                        href="#">
-                        <img src="{{ url_for('kpi-reunion.static', filename='img/logo.png') }}" height="60px"
+                        <img src="{{ url_for('rpi-portal.static', filename='img/logo.png') }}" height="60px"
                              alt="Logo">
                         <h2 class="logo px-2 fw-bold fs-3 mb-0 ">রংপুর পলিটেকনিক ইনস্টিটিউট</h2>
                     </a>
@@ -118,21 +118,21 @@
     <!-- ============ End Footer  ============= -->
 
 
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/jquery.min.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/font-awesome.all.min.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/bootstrap-task.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/font-awesome.all.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/bootstrap-task.js') }}"></script>
 
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/confirm/jquery-confirm.min.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/datepicker/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/confirm/jquery-confirm.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/lib/select2/select2.min.js') }}"></script>
 
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.message.box.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.ajax.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.view.mode.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.account.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.event.js') }}"></script>
-<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.init.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.message.box.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.ajax.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.view.mode.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.account.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.event.js') }}"></script>
+<script src="{{ url_for('rpi-portal.static', filename='js/pweb/pweb.init.js') }}"></script>
 <script>
     PWeb.messageBox.parseAndShowMessage({{- util.get_status_message()|safe }})
 </script>
