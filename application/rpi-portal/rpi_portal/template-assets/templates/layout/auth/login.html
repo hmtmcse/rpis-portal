@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('rpi-portal.static', filename='css/lib/theme.css') }}" rel="stylesheet">
+    <title>Login</title>
+</head>
+<body>
+
+    <main class="main" id="top">
+      <div class="container-fluid">
+        <div class="row min-vh-100 bg-100">
+          <div class="col-6 d-none d-lg-block position-relative">
+            <div class="bg-holder" style="background-image:url({{ url_for('rpi-portal.static', filename='img/login-left.jpg') }});background-position: 50% 20%;">
+            </div>
+          </div>
+          <div class="col-sm-10 col-md-6 px-sm-0 align-self-center mx-auto py-5">
+            <div class="row justify-content-center g-0">
+              <div class="col-lg-9 col-xl-8 col-xxl-6">
+                <div class="card">
+                  <div class="card-header bg-circle-shape bg-shape text-center p-2">
+                      <div class="font-sans-serif fw-bolder fs-4 z-index-1 position-relative link-light light">{{data.name}}</div></div>
+                  <div class="card-body p-4">
+                    <div class="row flex-between-center">
+                      <div class="col-auto">
+                        <h3>Login</h3>
+                      </div>
+                    </div>
+                    {% include 'auth/show-error-message.html' %}
+                    <form action="" method="post">
+                      <div class="mb-3">
+                        <label class="form-label" for="split-login-email">Mobile</label>
+                          <input
+                                  type="text"
+                                  class="form-control {{ form.identifier.has_error and 'is-invalid' }}"
+                                  name="{{ form.identifier.name }}"
+                                  value="{{ form.identifier.value }}"
+                                  placeholder="Mobile"
+                          >
+                          {% if form.identifier.errors %}
+                              <div class="invalid-feedback">
+                                  {{- form.identifier.errors }}
+                              </div>
+                          {% endif %}
+                      </div>
+                      <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                          <label class="form-label" for="split-login-password">Password</label>
+                        </div>
+                          <input
+                                  type="password"
+                                  name="{{ form.password.name }}"
+                                  value="{{ form.password.value }}"
+                                  class="form-control {{ form.password.has_error and 'is-invalid' }}"
+                                  placeholder="Password"
+                          >
+                          {% if form.password.errors %}
+                              <div class="invalid-feedback">
+                                  {{- form.password.errors }}
+                              </div>
+                          {% endif %}
+                      </div>
+
+                      <div class="mb-3">
+                          <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Log in</button>
+
+                          <div class="row g-2 mt-2">
+                              <div class="col-6">
+                                  <a href="{{ url_for("site_controller.registration") }}" class="btn btn-secondary d-block w-100">Registration</a>
+                              </div>
+                              <div class="col-6">
+                                  <a href="{{ url_for("site_controller.bismillah") }}" class="btn btn-info d-block w-100">Home</a>
+                              </div>
+                          </div>
+                      </div>
+                        <div class="text-center">
+                            পাসওয়ার্ড ভুলে গেছেন?
+                            <a class="sm-d-block" href="{{- url_for("site_controller.reset_password") }}">রিসেট পাসওয়ার্ড</a>
+                        </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+
+</body>
+</html>

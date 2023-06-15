@@ -37,15 +37,17 @@
                                     {% show_input field=form.password, class="col-md-4" %}
                                     {% show_input field=form.email, class="col-md-4" %}
 
-                                    {% show_input field=form.emergencyContact, class="col-md-4" %}
-                                    {% show_input field=form.bloodGroup, class="col-md-4" %}
-                                    {% show_input field=form.technology, class="col-md-4" %}
+                                    {% show_input field=form.username, class="col-md-6" %}
+                                    {% show_input field=form.emergencyContact, class="col-md-6" %}
+
+                                    {% show_input field=form.bloodGroup, class="col-md-6" %}
+                                    {% show_input field=form.technology, class="col-md-6" %}
 
                                     {% show_input field=form.session, class="col-md-6" %}
                                     {% show_input field=form.shift, class="col-md-6" %}
 
-{#                                    {% show_input field=form.roll, class="col-md-4" %}#}
-{#                                    {% show_input field=form.registration, class="col-md-4" %}#}
+                                    {% show_input field=form.roll, class="col-md-4" %}
+                                    {% show_input field=form.registration, class="col-md-4" %}
                                     {% show_input field=form.passingYear, class="col-md-4" %}
 
                                     {{- tutil.recaptcha()|safe }}
