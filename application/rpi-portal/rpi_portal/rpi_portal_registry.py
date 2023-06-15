@@ -1,5 +1,6 @@
 from pf_flask_web.system12.pweb_interfaces import PWebAppRegistry
 from rpi_portal.controller.admin_controller import admin_controller
+from rpi_portal.controller.member_controller import member_controller
 from rpi_portal.controller.register_ass_controller import register_ass_controller
 from rpi_portal.controller.register_controller import register_controller
 from rpi_portal.controller.rpi_portal_controller import rpi_portal_controller
@@ -23,3 +24,4 @@ class RPIPortalRegistry(PWebAppRegistry):
         pweb_app.register_blueprint(admin_controller)
         pweb_app.register_blueprint(register_controller)
         pweb_app.register_blueprint(register_ass_controller)
+        pweb_app.register_blueprint(member_controller)

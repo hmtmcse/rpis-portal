@@ -1,0 +1,19 @@
+<div class="modal fade" id="avatar-upload-modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Crop Profile Image</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <div class="img-container text-center">
+              <img id="modal-avatar-image-view" class="cropper-hidden" style="max-width: 100%;" src="{{ url_for('kpi-reunion.static', filename='img/cover-photo.png') }}">
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary js-modal-crop-image">Crop</button>
+      </div>
+    </div>
+  </div>
+</div>
