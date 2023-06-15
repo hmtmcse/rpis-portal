@@ -7,8 +7,6 @@ from kpi_reunion.common.template_processor import TemplateProcessor, render
 from kpi_reunion.dto.member_form import MemberRegistrationForm, ChangePasswordForm, MemberEditProfileForm, \
     UploadProfileForm, ResetPasswordForm, ResetPasswordBySMSForm
 from kpi_reunion.model.member import Member
-from kpi_reunion.service.event_service import EventService
-from kpi_reunion.service.pdf_service import PDFService
 from pf_flask_auth.common.pffa_auth_util import AuthUtil
 from pf_flask_auth.data.pffa_form_auth_data import FormAuthData
 from pf_flask_auth.service.operator_form_service import OperatorFormService
@@ -28,8 +26,6 @@ class MemberService:
     city_service = CityService()
     request_processor = RequestProcessor()
     file_upload_man = PFFFFileUploadMan()
-    event_service = EventService()
-    pdf_service = PDFService()
     operator_form_service: OperatorFormService = OperatorFormService()
     operator_service = OperatorService()
 
@@ -172,11 +168,6 @@ class MemberService:
         form = MemberRegistrationForm()
         return self.form_crud_helper.form_create("site/registration-success", form, params=params, redirect_url=url_for("site_controller.bismillah"))
 
-    def payment_reference(self):
-        event = self.event_service.get_my_event()
-        params = {"event": event}
-        return self.form_crud_helper.template_helper.render("site/payment-reference", params=params)
-
     def support(self):
         params = {}
         return self.form_crud_helper.template_helper.render("member/support", params=params)
@@ -226,17 +217,6 @@ class MemberService:
         member.save()
         FormAuthData().ins().update_data(member)
         return {"success": True, "message": "Successfully Uploaded"}
-
-    def my_invitation(self, download=False):
-        event = self.event_service.get_my_event()
-        if not event or event.paymentStatus != "Paid":
-            flash("Please check the booking status", "error")
-            return redirect(url_for("member_controller.dashboard"))
-        if download:
-            content = render("member/invitation-card", {"event": event, "download": True})
-            file_name = self.pdf_service.generate_pdf(event.uuid, content)
-            return send_file(file_name, as_attachment=True)
-        return render("member/my-invitation", {"event": event})
 
     def reset(self, model_id: int):
         form = ResetPasswordForm()

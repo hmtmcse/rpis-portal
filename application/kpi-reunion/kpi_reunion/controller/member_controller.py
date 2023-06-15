@@ -1,6 +1,5 @@
 from flask import Blueprint
 from kpi_reunion.common.template_processor import render
-from kpi_reunion.service.event_service import EventService
 from kpi_reunion.service.member_service import MemberService
 
 url_prefix = "/member"
@@ -11,19 +10,6 @@ member_controller = Blueprint(
 )
 
 member_service = MemberService()
-event_service = EventService()
-
-
-@member_controller.route("/dashboard", methods=['POST', 'GET'])
-def dashboard():
-    event = event_service.get_my_event()
-    return render("member/dashboard", {"event": event})
-
-
-@member_controller.route("/my-event", methods=['GET'])
-def my_event():
-    event = event_service.get_my_event()
-    return render("member/my-event", {"event": event})
 
 
 @member_controller.route("/support", methods=['GET'])
