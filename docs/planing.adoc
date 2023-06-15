@@ -12,8 +12,8 @@
 
 
 === PreDefineService
-* Name
-* Status
+* name
+* status
 * identifier
 * prove
 * response
