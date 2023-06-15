@@ -2,11 +2,6 @@ from flask import url_for, redirect, flash
 from sqlalchemy import and_
 from application.config.app_config import Config
 from bdash.security.web_security import WebSecurity
-from kpi_reunion.common.kpir_assets_config import KPIRAssetsConfig
-from kpi_reunion.common.template_processor import TemplateProcessor, render
-from kpi_reunion.dto.member_form import MemberRegistrationForm, ChangePasswordForm, MemberEditProfileForm, \
-    UploadProfileForm, ResetPasswordForm, ResetPasswordBySMSForm
-from kpi_reunion.model.member import Member
 from pf_flask_auth.common.pffa_auth_util import AuthUtil
 from pf_flask_auth.data.pffa_form_auth_data import FormAuthData
 from pf_flask_auth.service.operator_form_service import OperatorFormService
@@ -19,6 +14,11 @@ from pf_messaging.structure.sms_abc import SMSABC
 from pf_py_common.py_common import PyCommon
 from pf_py_common.py_data_util import PyDataUtil
 from region.service.city_service import CityService
+from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
+from rpi_portal.common.template_processor import TemplateProcessor, render
+from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfileForm, ResetPasswordBySMSForm, \
+    ChangePasswordForm, UploadProfileForm, ResetPasswordForm
+from rpi_portal.model.member import Member
 
 
 class MemberService:
@@ -212,7 +212,7 @@ class MemberService:
     def upload_profile_photo(self):
         files = self.request_processor.request_helper.file_data()
         member = self.get_logged_in_member()
-        files = self.file_upload_man.validate_and_upload(files, UploadProfileForm(), KPIRAssetsConfig.profile, {"profilePhoto": member.uuid})
+        files = self.file_upload_man.validate_and_upload(files, UploadProfileForm(), RPIAssetsConfig.profile, {"profilePhoto": member.uuid})
         member.profilePhoto = files["profilePhoto"]
         member.save()
         FormAuthData().ins().update_data(member)

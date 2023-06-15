@@ -19,7 +19,6 @@ class KpiReunionRegistry(PWebAppRegistry):
 
     def register_controller(self, pweb_app):
         pweb_app.register_blueprint(kpi_reunion_controller)
-        pweb_app.register_blueprint(site_controller)
         pweb_app.register_blueprint(member_controller)
         pweb_app.register_blueprint(admin_controller)
         pweb_app.register_blueprint(manager_controller)
