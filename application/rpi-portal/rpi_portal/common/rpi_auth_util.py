@@ -12,3 +12,13 @@ class RPIAuthUtil:
             return True
         return False
 
+    @staticmethod
+    def is_role(name):
+        form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
+        if form_auth_data.otherFields and "accessType" in form_auth_data.otherFields and form_auth_data.otherFields["accessType"] == name:
+            return True
+        return False
+
+    @staticmethod
+    def is_student():
+        return RPIAuthUtil.is_role(MemberTypeEnum.Student.value)
