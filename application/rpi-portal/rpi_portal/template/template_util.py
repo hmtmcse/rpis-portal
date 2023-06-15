@@ -25,7 +25,7 @@ class TemplateUtil:
         form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
         if form_auth_data.profilePhoto:
             return f"/assets/profile/{form_auth_data.profilePhoto}"
-        return url_for('kpi-reunion.static', filename='img/profile-photo.jpg')
+        return url_for('rpi-portal.static', filename='img/profile-photo.jpg')
 
     @property
     def session_data(self):

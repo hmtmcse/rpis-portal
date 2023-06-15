@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('kpi-reunion.static', filename='css/lib/theme.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/confirm/jquery-confirm.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2-bootstrap-5-theme.min.css') }}" rel="stylesheet">
+
+    <link href="{{ url_for('kpi-reunion.static', filename='css/site-style.css') }}" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('kpi-reunion.static', filename='img/favicon.ico') }}">
+
+    <title>{% block title %}{{- pweb_app_name }}{% endblock %}</title>
+
+    <script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.js') }}"></script>
+    {{- util.set_base_js()|safe }}
+
+    <meta property="og:title" content="রংপুর পলিটেকনিক ইনস্টিটিউট শিক্ষার্থী পোর্টাল"/>
+    <meta property="og:description" content="রংপুর পলিটেকনিক ইনস্টিটিউট"/>
+    <meta property="og:image" content="{{- tutil.base_url + url_for('kpi-reunion.static', filename='img/kpi-reunion-logo.png') }}"/>
+</head>
+<body>
+    <main>
+        <!-- ============ Header  ============= -->
+        <header class="navbar navbar-expand-lg navbar-dark bd-navbar sticky-top bg-pf-primary">
+            <nav class="container-fluid bd-gutter flex-wrap flex-lg-nowrap px-md-5 px-3">
+                <a class="navbar-brand d-flex align-items-center" href="#">
+                    <img src="{{ url_for('kpi-reunion.static', filename='img/logo.jpg') }}" class="bf-logo" alt="Logo">
+                    <div class="logo px-2 fw-normal fs-2 text-white mb-0">রংপুর পলিটেকনিক ইনস্টিটিউট</div>
+                </a>
+                <button class="navbar-toggler d-flex d-lg-none order-3 p-2" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#bdNavbar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <div class="offcanvas-lg offcanvas-end " tabindex="-1" id="bdNavbar" data-bs-scroll="true">
+
+                    <div class="offcanvas-header px-4 pb-0">
+                        <h5 class="offcanvas-title text-white">Menu</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                                aria-label="Close" data-bs-target="#bdNavbar"></button>
+                    </div>
+
+                    <div class="offcanvas-body p-4 pt-0 p-lg-0">
+                        <hr class="d-lg-none text-white-50">
+                        <ul class="navbar-nav flex-row flex-wrap bd-navbar-nav">
+                            <li class="nav-item col-6 col-lg-auto">
+                                <a class="nav-link" href="{{ url_for("site_controller.bismillah") }}">
+                                    হোম
+                                </a>
+                            </li>
+                            <li class="nav-item col-6 col-lg-auto">
+                                <a class="nav-link" href="{{ url_for("operator_form_controller.login") }}">
+                                    লগ ইন
+                                </a>
+                            </li>
+                            <li class="nav-item col-6 col-lg-auto">
+                                <a class="nav-link" href="{{ url_for("site_controller.bismillah") }}">
+                                    রেজিস্ট্রেশন
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <!-- ============ End Header  ============= -->
+
+        {% block content %}{% endblock %}
+
+    </main>
+    <!-- ============ Footer  ============= -->
+    <footer id="footer" class="footer shadow-lg">
+        <div class="container-fluid footer-top">
+            <div class="row g-0 px-md-5 px-3">
+                <div class="col-lg-6 me-md-auto mb-3">
+                    <a class="d-inline-flex align-items-center mb-2 link-dark text-decoration-none logo-dark-white"
+                       href="#">
+                        <img src="{{ url_for('kpi-reunion.static', filename='img/logo.png') }}" height="60px"
+                             alt="Logo">
+                        <h2 class="logo px-2 fw-bold fs-3 mb-0 ">রংপুর পলিটেকনিক ইনস্টিটিউট</h2>
+                    </a>
+                    <p>‘যেথায় থাকি, যে যেখানে, বাঁধন আছে প্রাণে প্রাণে।‘ রংপুর পলিটেকনিক ইনস্টিটিউটের সকল ছাত্র
+                        ছাত্রীদের অংশগ্রহনে রংপুর পলিটেকনিকের শিক্ষার্থী পোর্টাল।</p>
+                </div>
+
+                <div class="col-6 col-lg-3 mb-3">
+                    <h5>কুইক মেনু </h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="{{ url_for("site_controller.registration") }}">রেজিস্ট্রেশন</a>
+                        </li>
+                        <li class="mb-2">
+                            <a target="_blank" href="https://www.rpir.gov.bd/">রংপুর পলিটেকনিক ওয়েবসাইট</a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="https://banglafighter.com/" target="_blank">বাংলা ফাইটার এডুকেশন</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid px-3 px-md-5 py-3 copyright-sec align-items-center d-md-flex">
+            <div class="me-md-auto text-center text-md-start">
+                <div class="copyright">
+                    <span>Developed by
+                        <strong><span class="ms-1" >RPIR CMT 7th</span></strong>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <!-- ============ End Footer  ============= -->
+
+
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/jquery.min.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/font-awesome.all.min.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/bootstrap-task.js') }}"></script>
+
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/confirm/jquery-confirm.min.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/lib/select2/select2.min.js') }}"></script>
+
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.message.box.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.ajax.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.view.mode.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.account.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.event.js') }}"></script>
+<script src="{{ url_for('kpi-reunion.static', filename='js/pweb/pweb.init.js') }}"></script>
+<script>
+    PWeb.messageBox.parseAndShowMessage({{- util.get_status_message()|safe }})
+</script>
+</body>
+</html>
