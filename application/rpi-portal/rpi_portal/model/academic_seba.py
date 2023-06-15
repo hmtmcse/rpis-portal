@@ -1,5 +1,4 @@
 import json
-
 from sqlalchemy import Integer
 from sqlalchemy.dialects.mysql import LONGTEXT
 from pf_flask_db.pf_app_model import AppModel
@@ -30,7 +29,7 @@ class AcademicSeba(AppModel):
     description = pweb_db.Column("roll", pweb_db.String(500))
     resolveDate = pweb_db.Column("resolve_date", pweb_db.DateTime)
 
-    memberId = pweb_db.Column("member_Id", pweb_db.BigInteger().with_variant(Integer, "sqlite"), pweb_db.ForeignKey('member.id'), nullable=False)
+    memberId = pweb_db.Column("member_Id", pweb_db.BigInteger().with_variant(Integer, "sqlite"), pweb_db.ForeignKey('member.id'))
 
     additionalDataJson = pweb_db.Column("additional_data_json", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
 

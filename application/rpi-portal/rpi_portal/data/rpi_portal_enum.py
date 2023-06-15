@@ -9,13 +9,13 @@ class MemberTypeEnum(BaseEnum):
 
 
 class Technology(BaseEnum):
-    Construction = "Construction"
+    Electrical = "Electrical"
     Electronics = "Electronics"
     Computer = "Computer"
-    AIDT = "AIDT"
-    Electrical = "Electrical"
     Mechanical = "Mechanical"
     Civil = "Civil"
+    Power = "Power"
+    ElectroMedical = "ElectroMedical"
 
 
 class Shift(BaseEnum):

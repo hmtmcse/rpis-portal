@@ -131,11 +131,6 @@ class UploadProfileForm(FormAppDef):
     profilePhoto = FileField(required=True, error_messages={"required": "Please upload file."}).set_allowed_extension(["jpg", "png", "jpeg"])
 
 
-class EventRegistrationForm(FormAppDef):
-    adult = fields.Float()
-    child = fields.Float()
-
-
 class ResetPasswordBySMSForm(FormAppDef):
     mobile = fields.String(required=True, error_messages={"required": "Please enter mobile"})
 
