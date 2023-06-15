@@ -18,6 +18,10 @@ class NavigationData:
         navigation_list.append(NavigationData.get_nav_item("member_controller.profile", "Profile", "fa-brands fa-canadian-maple-leaf"))
         navigation_list.append(NavigationData.get_nav_item("member_controller.support", "Support", "fa-solid fa-headset"))
 
+        navigation_list.append(NavigationData.get_nav_item("member_controller.mark_sheet", "Mark Sheet", "fa-solid fa-headset"))
+        navigation_list.append(NavigationData.get_nav_item("member_controller.certificate", "Certificate", "fa-solid fa-headset"))
+        navigation_list.append(NavigationData.get_nav_item("member_controller.protoyon_potro", "প্রত্যয়ন পত্র", "fa-solid fa-headset"))
+
         if RPIAuthUtil.is_admin():
             pass
 

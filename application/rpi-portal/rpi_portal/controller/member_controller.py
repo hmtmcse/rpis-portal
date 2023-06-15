@@ -22,6 +22,21 @@ def support():
     return member_service.support()
 
 
+@member_controller.route("/mark-sheet", methods=['GET'])
+def mark_sheet():
+    return member_service.mark_sheet()
+
+
+@member_controller.route("/certificate", methods=['GET'])
+def certificate():
+    return member_service.certificate()
+
+
+@member_controller.route("/protoyon-potro", methods=['GET'])
+def protoyon_potro():
+    return member_service.protoyon_potro()
+
+
 @member_controller.route("/profile", methods=['GET'])
 def profile():
     return member_service.profile()

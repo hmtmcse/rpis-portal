@@ -171,6 +171,18 @@ class MemberService:
         params = {}
         return self.form_crud_helper.template_helper.render("member/support", params=params)
 
+    def mark_sheet(self):
+        params = {}
+        return self.form_crud_helper.template_helper.render("member/mark-sheet", params=params)
+
+    def certificate(self):
+        params = {}
+        return self.form_crud_helper.template_helper.render("member/certificate", params=params)
+
+    def protoyon_potro(self):
+        params = {}
+        return self.form_crud_helper.template_helper.render("member/protoyon-potro", params=params)
+
     def get_logged_in_member(self):
         form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
         if not form_auth_data or not form_auth_data.isLoggedIn:
