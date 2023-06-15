@@ -1,0 +1,74 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+   Mark Sheet | Rangpur Polytechnic Institute
+{% endblock %}
+
+
+{% block content %}
+     <div class="card mb-3">
+        <div class="bg-holder d-none d-lg-block bg-card pf-bg-left"></div>
+        <div class="card-body pf-table-header position-relative">
+            <div class="d-md-flex justify-content-between d-sm-block align-items-center">
+                <div class="mb-0 heading-text">Mark Sheet List </div>
+                <form class="pf-table-action" action="">
+                    <div class="input-group align-items-center">
+                        <input class="form-control remove-focus" name="search" type="text" placeholder="Search">
+                        <button class="btn btn-secondary  pf-icon-button" type="submit" title="Search">
+                             <i class="fas fa-search"></i>
+                        </button>
+                        <a class="btn btn-danger pf-icon-button" title="Reload" href="#">
+                            <i class="fas fa-sync"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body table-responsive-sm">
+            <table class="table table-bordered table-hover">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Technology</th>
+                        <th class="table-action">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Omuk Tomuk</td>
+                        <td>01xx-xxxxxxx</td>
+                        <td>Computer</td>
+
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <span data-bs-toggle="dropdown" aria-expanded="true" class="show">
+                                    <span class="text-black btn-sm cursor-pointer">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </span>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item">
+                                        <a href="#">
+                                            <i class="fa-solid fa-check-to-slot pe-1"></i>
+                                            Change Status
+                                        </a>
+                                    </li>
+                                    <li class="dropdown-item">
+                                        <a href="#"><i class="fa-regular fa-eye pe-1"></i>Details</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
