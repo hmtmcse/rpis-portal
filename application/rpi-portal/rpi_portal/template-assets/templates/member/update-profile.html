@@ -26,14 +26,20 @@
                     {% show_input field=form.bloodGroup, class="col-md-4" %}
                     {% show_input field=form.technology, class="col-md-4" %}
 
-                    {% show_input field=form.session, class="col-md-4" %}
+                    <div class="col-md-4">
+                        <label class="form-label">
+                            <span class="text-danger me-1">*</span>
+                            Session
+                        </label>
+                        <select class="form-select" required name="academicSession">
+                            <option value="" selected disabled>Select</option>
+                            {% for select in tutil.session_dropdown_data %}
+                                <option {{ "selected" if form.academicSession.value == select }} value="{{- select }}">{{- select }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                     {% show_input field=form.shift, class="col-md-4" %}
                     {% show_input field=form.passingYear, class="col-md-4" %}
-
-                    {% show_input field=form.presentAddress, class="col-md-6" %}
-                    {% show_input field=form.permanentAddress, class="col-md-6" %}
-                    {% show_input field=form.jobDetails, class="col-md-6" %}
-                    {% show_input field=form.jobAddress, class="col-md-6" %}
 
                     <div class="mt-3 col-12">
                         <span class="float-end">
