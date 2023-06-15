@@ -16,6 +16,7 @@ from pf_py_common.py_data_util import PyDataUtil
 from region.service.city_service import CityService
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor, render
+from rpi_portal.data.rpi_portal_enum import MemberTypeEnum
 from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfileForm, ResetPasswordBySMSForm, \
     ChangePasswordForm, UploadProfileForm, ResetPasswordForm
 from rpi_portal.model.member import Member
@@ -213,9 +214,10 @@ class MemberService:
                 return redirect(url_for("member_controller.profile"))
         return self.profile(form=form)
 
-    def member_list(self):
+    def student_list(self):
         search_fields = ["name", "email", "homeDistrict", "mobile", "session", "passingYear", "technology", "bloodGroup"]
-        return self.form_crud_helper.form_paginated_list("member/member-list", search_fields=search_fields, response_def=MemberRegistrationForm())
+        query = Member.query.filter(Member.accessType == MemberTypeEnum.Student.value)
+        return self.form_crud_helper.form_paginated_list("member/member-list", search_fields=search_fields, response_def=MemberRegistrationForm(), query=query)
 
     def member_details(self, model_id: int):
         return self.form_crud_helper.form_details("member/member-details", model_id, url_for("admin_controller.member_list"), display_def=MemberRegistrationForm())

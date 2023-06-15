@@ -22,3 +22,7 @@ class RPIAuthUtil:
     @staticmethod
     def is_student():
         return RPIAuthUtil.is_role(MemberTypeEnum.Student.value)
+
+    @staticmethod
+    def is_register():
+        return RPIAuthUtil.is_role(MemberTypeEnum.Register.value)
