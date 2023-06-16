@@ -2,7 +2,6 @@ import csv
 import os.path
 from flask import redirect, url_for, flash
 from sqlalchemy import and_
-
 from pf_flask_file.pfff_file_upload_man import PFFFFileUploadMan
 from pf_flask_rest.helper.pf_flask_form_crud_helper import FormCRUDHelper
 from pf_flask_rest.pf_flask_request_processor import RequestProcessor
