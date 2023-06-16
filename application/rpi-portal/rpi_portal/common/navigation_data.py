@@ -23,6 +23,7 @@ class NavigationData:
 
         if RPIAuthUtil.is_admin():
             navigation_list.append(NavigationData.get_nav_item("admin_controller.student_list", "Student", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("admin_controller.operator_list", "Operator", "fa-solid fa-rectangle-list"))
 
         if RPIAuthUtil.is_register():
             navigation_list.append(NavigationData.get_nav_item("register_controller.student_list", "Student", "fa-solid fa-rectangle-list"))

@@ -14,6 +14,17 @@ member_service = MemberService()
 management_service = ManagementService()
 
 
+@admin_controller.route("/operator-list", methods=['GET'])
+def operator_list():
+    return member_service.operator_list()
+
+
+@admin_controller.route("/operator-cu/<int:id>", methods=['GET', 'POST'])
+@admin_controller.route("/operator-cu", methods=['GET', 'POST'])
+def operator_cu(id: int = None):
+    return member_service.operator_cu(id)
+
+
 @admin_controller.route("/student-list", methods=['GET'])
 def student_list():
     return member_service.student_list()
@@ -27,6 +38,11 @@ def member_details(id: int):
 @admin_controller.route("/reset/<int:id>", methods=['POST', 'GET'])
 def reset(id: int):
     return member_service.reset(id)
+
+
+@admin_controller.route("/reset-operator/<int:id>", methods=['POST', 'GET'])
+def reset_operator(id: int):
+    return member_service.reset(id, success_url="admin_controller.operator_list")
 
 
 @admin_controller.route("/import-mark-sheet", methods=['POST', 'GET'])

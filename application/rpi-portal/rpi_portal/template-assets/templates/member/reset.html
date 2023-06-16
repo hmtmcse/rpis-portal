@@ -19,10 +19,11 @@
                     {% show_input field=form.newPassword, class="col-md-12" %}
                     {% show_input field=form.confirmPassword, class="col-md-12" %}
                     <input type="hidden" name="id" value="{{- id }}">
+                    <input type="hidden" name="redirect_to" value="{{- redirect_to }}">
                     <div class="mt-3 col-12">
                         <span class="float-end">
                             <button type="submit" class="btn btn-primary">Reset</button>
-                            <a href="{{- url_for("admin_controller.member_list") }}" class="btn btn-danger ms-2" type="button">Cancel</a>
+                            <a href="{{- url_for(redirect_to) }}" class="btn btn-danger ms-2" type="button">Cancel</a>
                         </span>
                     </div>
                 </div>

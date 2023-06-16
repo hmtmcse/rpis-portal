@@ -48,6 +48,7 @@ class ResetPasswordForm(FormBaseDef):
     newPassword = fields.String(required=True, error_messages={"required": "Please enter new password."}, type="password")
     confirmPassword = fields.String(required=True, error_messages={"required": "Please enter confirm password."}, type="password")
     id = fields.Integer(required=True, error_messages={"required": "Please enter id"})
+    redirect_to = fields.String(allow_none=True)
 
     @validates_schema
     def validate_schema(self, data, **kwargs):
@@ -65,6 +66,20 @@ class MemberDetailsDTO(OperatorDTO):
     def enum_to_string(self, data, name):
         if name in data and data[name]:
             data[name] = str(data[name])
+
+
+class OperatorDataDTO(FormAppDef):
+    name = fields.String(required=True, error_messages={"required": "Please enter name"})
+    accessType = EnumField(MemberTypeEnum, required=True, error_messages={"required": "Please select Role"}, selectOptionLabel="value", selectFirstEntry="Role", label="Role")
+    mobile = fields.String(required=True, error_messages={"required": "Please enter mobile"})
+
+
+class OperatorCreateForm(OperatorDataDTO):
+    password = fields.String(required=True, error_messages={"required": "Please enter password"}, type="password")
+
+
+class OperatorUpdateForm(OperatorDataDTO):
+    id = fields.Integer(required=True, error_messages={"required": "Please enter id"}, type="hidden", isIgnoreLabel=True)
 
 
 class MemberRegistrationForm(FormAppDef):

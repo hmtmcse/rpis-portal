@@ -18,7 +18,7 @@ from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor, render
 from rpi_portal.data.rpi_portal_enum import MemberTypeEnum
 from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfileForm, ResetPasswordBySMSForm, \
-    ChangePasswordForm, UploadProfileForm, ResetPasswordForm
+    ChangePasswordForm, UploadProfileForm, ResetPasswordForm, OperatorDataDTO, OperatorCreateForm, OperatorUpdateForm
 from rpi_portal.model.member import Member
 
 
@@ -217,8 +217,26 @@ class MemberService:
         query = Member.query.filter(Member.accessType == MemberTypeEnum.Student.value)
         return self.form_crud_helper.form_paginated_list("member/member-list", search_fields=search_fields, response_def=MemberRegistrationForm(), query=query)
 
+    def operator_cu(self, id):
+        button = "Create"
+        form = OperatorCreateForm()
+        action_url = url_for("admin_controller.operator_cu")
+        is_edit = False
+        if id:
+            button = "Update"
+            form = OperatorUpdateForm()
+            is_edit = True
+            action_url = url_for("admin_controller.operator_cu", id=id)
+        params = {"button": button, "action": action_url, "is_edit": is_edit}
+        return self.form_crud_helper.template_helper.render("operator/operator-cu", params=params, form=form)
+
+    def operator_list(self):
+        search_fields = ["name", "email", "homeDistrict"]
+        query = Member.query.filter(Member.accessType != MemberTypeEnum.Student.value)
+        return self.form_crud_helper.form_paginated_list("operator/operator-list", search_fields=search_fields, response_def=OperatorDataDTO(), query=query)
+
     def member_details(self, model_id: int):
-        return self.form_crud_helper.form_details("member/member-details", model_id, url_for("admin_controller.member_list"), display_def=MemberRegistrationForm())
+        return self.form_crud_helper.form_details("member/member-details", model_id, url_for("admin_controller.student_list"), display_def=MemberRegistrationForm())
 
     def upload_profile_photo(self):
         files = self.request_processor.request_helper.file_data()
@@ -229,12 +247,13 @@ class MemberService:
         FormAuthData().ins().update_data(member)
         return {"success": True, "message": "Successfully Uploaded"}
 
-    def reset(self, model_id: int):
+    def reset(self, model_id: int, success_url: str = "admin_controller.student_list"):
         form = ResetPasswordForm()
-        params = {"id": model_id}
+        params = {"id": model_id, "redirect_to": success_url}
         if form.is_post_request() and form.is_valid_data():
             data = form.get_data()
             model_id = PyDataUtil.get_dict_value(data, "id")
+            success_url = PyDataUtil.get_dict_value(data, "redirect_to", success_url)
             operator = self.operator_service.get_operator_by_id(model_id)
             if not operator:
                 form.definition.set_field_errors({"confirmPassword": "Invalid operator"})
@@ -242,7 +261,7 @@ class MemberService:
                 operator.password = form.confirmPassword
                 operator.save()
                 flash("Successfully reset!", "success")
-                redirect_url = url_for("admin_controller.member_list")
+                redirect_url = url_for(success_url)
                 return redirect(redirect_url)
         return self.form_crud_helper.render_view(view_name="member/reset", form=form, params=params)
 
