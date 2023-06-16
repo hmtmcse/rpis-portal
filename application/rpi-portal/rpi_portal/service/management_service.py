@@ -8,7 +8,6 @@ from pf_flask_file.pfff_file_upload_man import PFFFFileUploadMan
 from pf_flask_rest.helper.pf_flask_form_crud_helper import FormCRUDHelper
 from pf_flask_rest.pf_flask_request_processor import RequestProcessor
 from pf_py_common.py_common import PyCommon
-from pf_py_common.py_data_util import PyDataUtil
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor
 from rpi_portal.data.rpi_portal_enum import MarkSheetStatus, DataGroupEnum
@@ -243,12 +242,16 @@ class ManagementService:
 
         params["model"] = service
         if form.is_post_request() and form.is_valid_data():
-            if not service.token:
-                service.token = PyCommon.get_random_6digit()
-            service.status = MarkSheetStatus.Processing.value
-            model = self.form_crud_helper.update(form_def=form, existing_model=service)
-            flash(f"Successfully Processed", "success")
+            service.status = MarkSheetStatus.Received.value
+            data = form.get_data()
+            data["prove"] = "name"
+            model = self.form_crud_helper.update(form_def=form, existing_model=service, data=data)
+            files = self.request_processor.request_helper.file_data()
+            uploaded_files = self.file_upload_man.validate_and_upload(files, form, RPIAssetsConfig.register, {"prove": model.uuid})
+            model.prove = uploaded_files["prove"]
+            model.save()
+            flash(f"Successfully Resolved", "success")
             return redirect(url_for("register_controller.receive_request"))
         else:
             form.set_dict_value(form.dump(service))
-        return self.form_crud_helper.template_helper.render("register/process-request", params=params, form=form)
+        return self.form_crud_helper.template_helper.render("register/resolve-request", params=params, form=form)

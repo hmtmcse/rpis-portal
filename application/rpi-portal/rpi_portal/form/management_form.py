@@ -20,7 +20,7 @@ class ResolveRequestForm(FormAppDef):
         model = AcademicSeba
         load_instance = True
 
-    prove = FileField(required=True, error_messages={"required": "Please upload prove."}, type="file").set_allowed_extension(["jpg", "png", "jpeg"])
+    prove = FileField(required=True, error_messages={"required": "Please upload prove."}, type="file").set_allowed_extension(["jpg", "png", "jpeg"]).allow_string_name()
     resolveDate = fields.Date(required=True, format="%d/%m/%Y", label="Resolve Date", inputAttrClass="add-datepicker", attributes="autocomplete='off'")
 
 

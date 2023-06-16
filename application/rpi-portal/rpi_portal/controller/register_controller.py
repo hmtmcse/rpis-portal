@@ -56,3 +56,8 @@ def receive_request():
 @register_controller.route("/process-request/<int:id>", methods=['GET', 'POST'])
 def process_request(id: int):
     return management_service.process_request(id)
+
+
+@register_controller.route("/resolve-request/<int:id>", methods=['GET', 'POST'])
+def resolve_request(id: int):
+    return management_service.resolve_request(id)

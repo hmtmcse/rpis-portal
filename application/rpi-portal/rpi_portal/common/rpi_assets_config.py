@@ -8,3 +8,4 @@ class RPIAssetsConfig:
     pdf = PFPFFileUtil.join_path(PWebRegistry.config.UPLOADED_STATIC_RESOURCES, "pdf")
     qrcode = PFPFFileUtil.join_path(PWebRegistry.config.UPLOADED_STATIC_RESOURCES, "qrcode")
     register = PFPFFileUtil.join_path(PWebRegistry.config.UPLOADED_STATIC_RESOURCES, "register")
+    prove = PFPFFileUtil.join_path(PWebRegistry.config.UPLOADED_STATIC_RESOURCES, "prove")
