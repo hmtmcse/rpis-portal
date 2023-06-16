@@ -17,9 +17,10 @@ from region.service.city_service import CityService
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.rpi_auth_util import RPIAuthUtil
 from rpi_portal.common.template_processor import TemplateProcessor, render
-from rpi_portal.data.rpi_portal_enum import MemberTypeEnum, MemberStatus
+from rpi_portal.data.rpi_portal_enum import MemberTypeEnum, MemberStatus, DataGroupEnum
 from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfileForm, ResetPasswordBySMSForm, \
     ChangePasswordForm, UploadProfileForm, ResetPasswordForm, OperatorDataDTO, OperatorCreateForm, OperatorUpdateForm
+from rpi_portal.model.academic_seba import AcademicSeba
 from rpi_portal.model.member import Member
 
 
@@ -171,8 +172,23 @@ class MemberService:
         params = {}
         return self.form_crud_helper.template_helper.render("member/support", params=params)
 
-    def mark_sheet(self):
+    def my_mark_sheet(self):
+        member = self.get_logged_in_member()
         params = {}
+        my_mark_sheets = AcademicSeba.query.filter(and_(AcademicSeba.memberId == member.id, AcademicSeba.dataGroup == DataGroupEnum.Sheet.value)).all()
+
+        if not my_mark_sheets:
+            _my_mark_sheets = AcademicSeba.query.filter(and_(AcademicSeba.roll == member.roll, AcademicSeba.dataGroup == DataGroupEnum.Sheet.value)).all()
+            if _my_mark_sheets:
+                for sheet in _my_mark_sheets:
+                    sheet.technology = member.technology
+                    sheet.session = member.academicSession
+                    sheet.shift = member.shift
+                    sheet.registration = member.registration
+                    sheet.memberId = member.id
+                    sheet.save()
+            my_mark_sheets = _my_mark_sheets
+        params["table"] = my_mark_sheets
         return self.form_crud_helper.template_helper.render("member/mark-sheet", params=params)
 
     def certificate(self):

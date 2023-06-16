@@ -1,5 +1,6 @@
 from flask import Blueprint
 from rpi_portal.common.template_processor import render
+from rpi_portal.service.management_service import ManagementService
 from rpi_portal.service.member_service import MemberService
 
 url_prefix = "/member"
@@ -10,6 +11,7 @@ member_controller = Blueprint(
 )
 
 member_service = MemberService()
+management_service = ManagementService()
 
 
 @member_controller.route("/dashboard", methods=['POST', 'GET'])
@@ -24,7 +26,7 @@ def support():
 
 @member_controller.route("/mark-sheet", methods=['GET'])
 def mark_sheet():
-    return member_service.mark_sheet()
+    return management_service.my_mark_sheet()
 
 
 @member_controller.route("/certificate", methods=['GET'])

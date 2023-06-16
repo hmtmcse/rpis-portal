@@ -103,4 +103,25 @@ class ManagementService:
 
     def mark_sheet(self):
         search_fields = ["roll", "technology", "session", "name", "registration"]
-        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields)
+        query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Sheet.value))
+        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
+
+    def adjust_mark_sheet_mapping(self, member):
+        my_mark_sheets = AcademicSeba.query.filter(and_(AcademicSeba.roll == member.roll, AcademicSeba.dataGroup == DataGroupEnum.Sheet.value, AcademicSeba.memberId == None)).all()
+        if not my_mark_sheets:
+            return
+
+        for sheet in my_mark_sheets:
+            sheet.technology = member.technology
+            sheet.session = member.academicSession
+            sheet.shift = member.shift
+            sheet.registration = member.registration
+            sheet.memberId = member.id
+            sheet.save()
+
+    def my_mark_sheet(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        member = self.member_service.get_logged_in_member()
+        self.adjust_mark_sheet_mapping(member)
+        query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Sheet.value, AcademicSeba.memberId == member.id))
+        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
