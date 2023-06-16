@@ -50,7 +50,7 @@ class ManagementService:
 
             if not file_name or not os.path.exists(file_path):
                 flash(f"Invalid file", "error")
-                return redirect(url_for("admin_controller.operator_list"))
+                return redirect(url_for("register_controller.mark_sheet"))
 
             with open(file_path, 'r') as csv_file:
                 csvreader = csv.reader(csv_file)
@@ -90,6 +90,9 @@ class ManagementService:
 
                     existing_entry.save()
                     index += 1
+
+                flash(f"Successfully Imported", "success")
+                return redirect(url_for("register_controller.mark_sheet"))
 
         return self.form_crud_helper.template_helper.render("register/mark-sheet-import", params=params, form=form)
 
