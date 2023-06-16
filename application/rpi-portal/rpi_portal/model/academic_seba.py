@@ -7,6 +7,7 @@ from pf_flask_web.system12.pweb_db import pweb_db
 
 class AcademicSeba(AppModel):
 
+    dataGroup = pweb_db.Column("data_group", pweb_db.String(10))
     roll = pweb_db.Column("roll", pweb_db.String(20))
     technology = pweb_db.Column("technology", pweb_db.String(50))
     session = pweb_db.Column("session", pweb_db.String(50))
@@ -26,7 +27,7 @@ class AcademicSeba(AppModel):
     charge = pweb_db.Column("charge", pweb_db.Float())
     paid = pweb_db.Column("paid", pweb_db.Float())
 
-    description = pweb_db.Column("roll", pweb_db.String(500))
+    description = pweb_db.Column("description", pweb_db.String(500))
     resolveDate = pweb_db.Column("resolve_date", pweb_db.DateTime)
 
     memberId = pweb_db.Column("member_Id", pweb_db.BigInteger().with_variant(Integer, "sqlite"), pweb_db.ForeignKey('member.id'))
