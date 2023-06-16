@@ -1,7 +1,7 @@
 {% extends "layout/base.html" %}
 
 {% block title %}
-   Member | Rangpur Polytechnic Institute
+   Mark Sheet | Rangpur Polytechnic Institute
 {% endblock %}
 
 
@@ -21,7 +21,7 @@
                         <a class="btn btn-success pf-icon-button" title="Import" href="{{ url_for("register_controller.import_mark_sheet") }}">
                             <i class="fa-solid fa-upload"></i>
                         </a>
-                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="#">
+                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="{{- url_for("register_controller.mark_sheet") }}">
                             <i class="fas fa-sync"></i>
                         </a>
                     </div>
@@ -66,7 +66,7 @@
                                     </li>
                                     <li class=" dropdown-item">
                                         <a href="{{- url_for("admin_controller.reset_operator", id=row.id) }}">
-                                            <i class="fa-solid fa-rotate-right"></i>
+                                            <i class="fa-solid fa-rotate-right pe-1"></i>
                                             Reset
                                         </a>
                                     </li>

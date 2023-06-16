@@ -15,9 +15,20 @@
     <div class="card mb-3">
         <div class="card-body">
             <form class="needs-validation profile-form" method="post" enctype="multipart/form-data" action="{{ url_for("register_controller.resolve_request", id=model_id) }}" noValidate>
+                <div class="row g-1 mb-3">
+                    <div class="col-4 col-md-2"><span class="fw-bold">Token No</span></div>
+                    <div class="col-8 col-md-10"><span class="fw-bold"><span class="me-1">:</span> {{- model.token }}</span></div>
+
+                    <div class="col-4 col-md-2"><span class="fw-bold">Appointment Date</span></div>
+                    <div class="col-8 col-md-10"><span class="fw-bold"><span class="me-1">:</span> {{- model.appointmentDate }}</span></div>
+
+                    <div class="col-4 col-md-2"><span class="fw-bold">Response note</span></div>
+                    <div class="col-8 col-md-10"><span class="fw-bold"><span class="me-1">:</span> {{- model.response }}</span>
+                    </div>
+
+                </div>
+
                 <div class="row g-3">
-
-
                     {% show_input field=form.resolveDate, class="col-md-12" %}
                     {% show_input field=form.prove, class="col-md-12" %}
 

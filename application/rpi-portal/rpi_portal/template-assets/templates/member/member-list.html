@@ -10,7 +10,7 @@
         <div class="bg-holder d-none d-lg-block bg-card pf-bg-left"></div>
         <div class="card-body pf-table-header position-relative">
             <div class="d-md-flex justify-content-between d-sm-block align-items-center">
-                <div class="mb-0 heading-text">Member List ({{- table.total }})</div>
+                <div class="mb-0 heading-text">Student List ({{- table.total }})</div>
                 <form class="pf-table-action" action="">
                     <div class="input-group align-items-center">
                         <input class="form-control remove-focus" name="search" type="text" placeholder="Search"
@@ -18,7 +18,7 @@
                         <button class="btn btn-secondary  pf-icon-button" type="submit" title="Search">
                              <i class="fas fa-search"></i>
                         </button>
-                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="#">
+                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="{{- url_for("admin_controller.student_list") }}">
                             <i class="fas fa-sync"></i>
                         </a>
                     </div>
