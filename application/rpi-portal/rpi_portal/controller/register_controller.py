@@ -32,3 +32,13 @@ def registration_approve(id: int):
 @register_controller.route("/mark-sheet", methods=['GET'])
 def mark_sheet():
     return management_service.mark_sheet()
+
+
+@register_controller.route("/import-certificate", methods=['GET'])
+def import_certificate():
+    return management_service.import_certificate()
+
+
+@register_controller.route("/import-mark-sheet", methods=['GET', 'POST'])
+def import_mark_sheet():
+    return management_service.import_mark_sheet()
