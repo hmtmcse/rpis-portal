@@ -58,7 +58,7 @@
                                 <ul class="dropdown-menu">
                                     {% if row.status == "Processing" %}
                                         <li class=" dropdown-item">
-                                            <a href="{{- url_for("admin_controller.operator_cu", id=row.id) }}">
+                                            <a href="{{- url_for("member_controller.receive_request_details", id=row.id) }}">
                                                 <i class="fa-regular fa-eye pe-1"></i>
                                                 Details
                                             </a>

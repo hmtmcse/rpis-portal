@@ -62,3 +62,8 @@ def upload_profile_photo():
 @member_controller.route("/send-mark-sheet-request/<int:id>", methods=['GET'])
 def send_mark_sheet_request(id: int):
     return management_service.send_receive_request(id)
+
+
+@member_controller.route("/receive-request-details/<int:id>", methods=['GET'])
+def receive_request_details(id: int):
+    return management_service.receive_request_details(id)

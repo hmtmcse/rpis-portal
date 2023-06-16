@@ -196,6 +196,18 @@ class ManagementService:
     def get_service_by_id(self, id):
         return AcademicSeba.query.filter(and_(AcademicSeba.id == id)).first()
 
+    def get_service_by_member_and_id(self, id):
+        member = self.member_service.get_logged_in_member()
+        return AcademicSeba.query.filter(and_(AcademicSeba.id == id, AcademicSeba.memberId == member.id)).first()
+
+    def receive_request_details(self, id):
+        model = self.get_service_by_member_and_id(id)
+        if not model:
+            flash(f"Invalid request", "error")
+            return redirect(url_for("member_controller.dashboard"))
+        params = {"model": model}
+        return self.form_crud_helper.template_helper.render("member/receive-request-details", params=params)
+
     def send_receive_request(self, model_id, redirect_url="member_controller.mark_sheet"):
         model = self.get_service_by_id(model_id)
         if not model or model.status != MarkSheetStatus.NotReceived.value:
