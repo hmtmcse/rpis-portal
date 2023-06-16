@@ -221,6 +221,7 @@ class ManagementService:
             flash(f"Invalid request", "error")
             return redirect(url_for("register_controller.receive_request"))
 
+        params["model"] = service
         if form.is_post_request() and form.is_valid_data():
             if not service.token:
                 service.token = PyCommon.get_random_6digit()
@@ -229,8 +230,25 @@ class ManagementService:
             flash(f"Successfully Processed", "success")
             return redirect(url_for("register_controller.receive_request"))
         else:
-            form.set_model_value(service)
+            form.set_dict_value(form.dump(service))
         return self.form_crud_helper.template_helper.render("register/process-request", params=params, form=form)
 
     def resolve_request(self, model_id):
         form = ResolveRequestForm()
+        params = {"model_id": model_id}
+        service = self.get_service_by_id(model_id)
+        if not service:
+            flash(f"Invalid request", "error")
+            return redirect(url_for("register_controller.receive_request"))
+
+        params["model"] = service
+        if form.is_post_request() and form.is_valid_data():
+            if not service.token:
+                service.token = PyCommon.get_random_6digit()
+            service.status = MarkSheetStatus.Processing.value
+            model = self.form_crud_helper.update(form_def=form, existing_model=service)
+            flash(f"Successfully Processed", "success")
+            return redirect(url_for("register_controller.receive_request"))
+        else:
+            form.set_dict_value(form.dump(service))
+        return self.form_crud_helper.template_helper.render("register/process-request", params=params, form=form)
