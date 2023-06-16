@@ -97,12 +97,10 @@ class MemberService:
             is_email_available = self._is_email_available(form_data, form=form)
             is_username_and_mobile = self._is_username_and_mobile_num_available(form_data, form=form)
             if is_username_and_mobile and is_email_available:
+                form_data["isVerified"] = False
                 model = self.form_crud_helper.save(form_def=form, data=form_data)
                 if model:
-                    username = PyDataUtil.get_dict_value(form_data, "username")
-                    password = PyDataUtil.get_dict_value(form_data, "password")
-                    self.operator_form_service.login_by_credential(username, password)
-                    flash("Registration success", "success")
+                    flash("Registration data received", "success")
                     return redirect(url_for("site_controller.registration_success"))
             else:
                 flash("Please check the validation errors", "error")

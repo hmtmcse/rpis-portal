@@ -83,11 +83,11 @@ class MemberRegistrationForm(FormAppDef):
     passingYear = fields.String(error_messages={"required": "Please enter passing year"})
 
     homeDistrict = fields.String(required=True, error_messages={"required": "Please select home district"}, type="select", inputAttrClass="searchable-select")
-    bloodGroup = EnumField(BloodGroup, selectOptionLabel="value", selectFirstEntry="Blood Group")
 
     name = fields.String(required=True, error_messages={"required": "Please enter name"})
 
     email = fields.String(allow_none=True)
+    isVerified = fields.Boolean(allow_none=True)
 
     password = fields.String(required=True, error_messages={"required": "Please enter password"}, type="password")
 
