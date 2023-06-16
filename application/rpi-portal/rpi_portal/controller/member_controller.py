@@ -31,7 +31,7 @@ def mark_sheet():
 
 @member_controller.route("/certificate", methods=['GET'])
 def certificate():
-    return member_service.certificate()
+    return management_service.my_certificate()
 
 
 @member_controller.route("/protoyon-potro", methods=['GET'])

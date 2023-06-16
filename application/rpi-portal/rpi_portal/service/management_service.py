@@ -181,3 +181,10 @@ class ManagementService:
         self.adjust_mark_sheet_mapping(member)
         query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Sheet.value, AcademicSeba.memberId == member.id))
         return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
+
+    def my_certificate(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        member = self.member_service.get_logged_in_member()
+        self.adjust_mark_sheet_mapping(member)
+        query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Certificate.value, AcademicSeba.memberId == member.id))
+        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
