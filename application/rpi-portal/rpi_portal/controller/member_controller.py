@@ -57,3 +57,8 @@ def change_password():
 @member_controller.route("/upload-profile-photo", methods=['POST'])
 def upload_profile_photo():
     return member_service.upload_profile_photo()
+
+
+@member_controller.route("/send-mark-sheet-request/<int:id>", methods=['GET'])
+def send_mark_sheet_request(id: int):
+    return management_service.send_receive_request(id)

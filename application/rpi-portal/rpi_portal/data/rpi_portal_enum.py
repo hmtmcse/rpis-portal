@@ -42,6 +42,7 @@ class MemberStatus(BaseEnum):
 class MarkSheetStatus(BaseEnum):
     NotReceived = "NotReceived"
     Received = "Received"
+    ReceivedRequest = "ReceivedRequest"
     Processing = "Processing"
     NotFound = "NotFound"
 

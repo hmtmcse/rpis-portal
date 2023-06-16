@@ -48,6 +48,7 @@
                         <td>{{ row.technology|default("", True) }}</td>
                         <td>{{ row.status }}</td>
                         <td class="text-center">
+                        {% if row.status != "Received" %}
                             <div class="dropdown">
                                 <span data-bs-toggle="dropdown" aria-expanded="true" class="show">
                                     <span class="text-black btn-sm cursor-pointer">
@@ -55,20 +56,25 @@
                                     </span>
                                 </span>
                                 <ul class="dropdown-menu">
-                                    <li class=" dropdown-item">
-                                        <a href="{{- url_for("admin_controller.operator_cu", id=row.id) }}">
-                                            <i class="fa-regular fa-eye pe-1"></i>
-                                            Update
-                                        </a>
-                                    </li>
-                                    <li class=" dropdown-item">
-                                        <a href="{{- url_for("admin_controller.reset_operator", id=row.id) }}">
-                                            <i class="fa-solid fa-rotate-right"></i>
-                                            Reset
-                                        </a>
-                                    </li>
+                                    {% if row.status == "Processing" %}
+                                        <li class=" dropdown-item">
+                                            <a href="{{- url_for("admin_controller.operator_cu", id=row.id) }}">
+                                                <i class="fa-regular fa-eye pe-1"></i>
+                                                Details
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                    {% if row.status == "NotReceived" %}
+                                        <li class=" dropdown-item">
+                                            <a href="{{- url_for("member_controller.send_mark_sheet_request", id=row.id) }}">
+                                                <i class="fa-regular fa-eye pe-1"></i>
+                                                Receive Request
+                                            </a>
+                                        </li>
+                                    {% endif %}
                                 </ul>
                             </div>
+                        {% endif %}
                         </td>
                     </tr>
                   {% endfor %}

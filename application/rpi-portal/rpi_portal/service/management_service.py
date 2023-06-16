@@ -180,11 +180,24 @@ class ManagementService:
         member = self.member_service.get_logged_in_member()
         self.adjust_mark_sheet_mapping(member)
         query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Sheet.value, AcademicSeba.memberId == member.id))
-        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
+        return self.form_crud_helper.form_paginated_list("member/mark-sheet", search_fields=search_fields, query=query)
 
     def my_certificate(self):
         search_fields = ["roll", "technology", "session", "name", "registration"]
         member = self.member_service.get_logged_in_member()
         self.adjust_mark_sheet_mapping(member)
         query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Certificate.value, AcademicSeba.memberId == member.id))
-        return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
+        return self.form_crud_helper.form_paginated_list("member/certificate", search_fields=search_fields, query=query)
+
+    def get_service_by_id(self, id):
+        return AcademicSeba.query.filter(and_(AcademicSeba.id == id)).first()
+
+    def send_receive_request(self, model_id, redirect_url="member_controller.mark_sheet"):
+        model = self.get_service_by_id(model_id)
+        if not model or model.status != MarkSheetStatus.NotReceived.value:
+            flash(f"Invalid request", "error")
+            return redirect(url_for(redirect_url))
+        model.status = MarkSheetStatus.ReceivedRequest.value
+        model.save()
+        flash(f"Success fully send request", "success")
+        return redirect(url_for(redirect_url))
