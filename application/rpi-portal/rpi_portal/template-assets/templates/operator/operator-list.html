@@ -1,7 +1,7 @@
 {% extends "layout/base.html" %}
 
 {% block title %}
-   Member | Rangpur Polytechnic Institute
+   Operator | Rangpur Polytechnic Institute
 {% endblock %}
 
 
@@ -21,7 +21,7 @@
                         <a class="btn btn-success pf-icon-button" title="Add" href="{{ url_for("admin_controller.operator_cu") }}">
                             <i class="fa-solid fa-square-plus"></i>
                         </a>
-                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="#">
+                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="{{ url_for('admin_controller.operator_list') }}">
                             <i class="fas fa-sync"></i>
                         </a>
                     </div>

@@ -15,9 +15,10 @@
     <div class="card mb-3">
         <div class="card-body">
             <form class="needs-validation profile-form" method="post" action="{{ url_for("register_controller.process_request", id=model_id) }}" noValidate>
+
                 <div class="row g-3">
-
-
+                    <div class="col-4 col-md-2 col-lg-1"><span class="fw-bold">Token No:</span></div>
+                    <div class="col-8 col-md-10 col-lg-11"><span class="fw-bold">{{- model.token }}</span></div>
                     {% show_input field=form.appointmentDate, class="col-md-12" %}
                     {% show_input field=form.response, class="col-md-12" %}
 
