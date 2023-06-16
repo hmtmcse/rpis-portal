@@ -33,6 +33,8 @@ class MemberSeba(AppModel):
     memberId = pweb_db.Column("member_Id", pweb_db.BigInteger().with_variant(Integer, "sqlite"), pweb_db.ForeignKey('member.id'), nullable=False)
 
     resolveDate = pweb_db.Column("resolve_date", pweb_db.DateTime)
+    appointmentDate = pweb_db.Column("appointment_date", pweb_db.DateTime)
+    requestDate = pweb_db.Column("request_date", pweb_db.DateTime)
 
     additionalDataJson = pweb_db.Column("additional_data_json", pweb_db.Text().with_variant(LONGTEXT, "mysql"))
 

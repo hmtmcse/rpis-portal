@@ -46,3 +46,13 @@ def import_certificate():
 @register_controller.route("/import-mark-sheet", methods=['GET', 'POST'])
 def import_mark_sheet():
     return management_service.import_mark_sheet()
+
+
+@register_controller.route("/receive-request", methods=['GET'])
+def receive_request():
+    return management_service.receive_request()
+
+
+@register_controller.route("/process-request/<int:id>", methods=['GET', 'POST'])
+def process_request(id: int):
+    return management_service.process_request(id)

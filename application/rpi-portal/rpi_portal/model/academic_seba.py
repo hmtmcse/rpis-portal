@@ -28,7 +28,10 @@ class AcademicSeba(AppModel):
     paid = pweb_db.Column("paid", pweb_db.Float())
 
     description = pweb_db.Column("description", pweb_db.String(500))
+
     resolveDate = pweb_db.Column("resolve_date", pweb_db.DateTime)
+    appointmentDate = pweb_db.Column("appointment_date", pweb_db.DateTime)
+    requestDate = pweb_db.Column("request_date", pweb_db.DateTime)
 
     memberId = pweb_db.Column("member_Id", pweb_db.BigInteger().with_variant(Integer, "sqlite"), pweb_db.ForeignKey('member.id'))
 

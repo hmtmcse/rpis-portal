@@ -1,14 +1,19 @@
 import csv
 import os.path
+from datetime import datetime
+
 from flask import redirect, url_for, flash
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from pf_flask_file.pfff_file_upload_man import PFFFFileUploadMan
 from pf_flask_rest.helper.pf_flask_form_crud_helper import FormCRUDHelper
 from pf_flask_rest.pf_flask_request_processor import RequestProcessor
+from pf_py_common.py_common import PyCommon
+from pf_py_common.py_data_util import PyDataUtil
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor
 from rpi_portal.data.rpi_portal_enum import MarkSheetStatus, DataGroupEnum
-from rpi_portal.form.management_form import MarkSheetImportForm, CertificateImportForm
+from rpi_portal.form.management_form import MarkSheetImportForm, CertificateImportForm, ProcessRequestForm, \
+    ResolveRequestForm
 from rpi_portal.model.academic_seba import AcademicSeba
 from rpi_portal.service.member_service import MemberService
 
@@ -198,6 +203,34 @@ class ManagementService:
             flash(f"Invalid request", "error")
             return redirect(url_for(redirect_url))
         model.status = MarkSheetStatus.ReceivedRequest.value
+        model.requestDate = datetime.now()
         model.save()
         flash(f"Success fully send request", "success")
         return redirect(url_for(redirect_url))
+
+    def receive_request(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        query = AcademicSeba.query.filter(or_(AcademicSeba.status == MarkSheetStatus.ReceivedRequest.value, AcademicSeba.status == MarkSheetStatus.Processing.value))
+        return self.form_crud_helper.form_paginated_list("register/receive-request", search_fields=search_fields, query=query)
+
+    def process_request(self, model_id):
+        form = ProcessRequestForm()
+        params = {"model_id": model_id}
+        service = self.get_service_by_id(model_id)
+        if not service:
+            flash(f"Invalid request", "error")
+            return redirect(url_for("register_controller.receive_request"))
+
+        if form.is_post_request() and form.is_valid_data():
+            if not service.token:
+                service.token = PyCommon.get_random_6digit()
+            service.status = MarkSheetStatus.Processing.value
+            model = self.form_crud_helper.update(form_def=form, existing_model=service)
+            flash(f"Successfully Processed", "success")
+            return redirect(url_for("register_controller.receive_request"))
+        else:
+            form.set_model_value(service)
+        return self.form_crud_helper.template_helper.render("register/process-request", params=params, form=form)
+
+    def resolve_request(self, model_id):
+        form = ResolveRequestForm()

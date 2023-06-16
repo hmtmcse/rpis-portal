@@ -1,0 +1,82 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+   Receive Request | Rangpur Polytechnic Institute
+{% endblock %}
+
+
+{% block content %}
+    <div class="card mb-3">
+        <div class="bg-holder d-none d-lg-block bg-card pf-bg-left"></div>
+        <div class="card-body pf-table-header position-relative">
+            <div class="d-md-flex justify-content-between d-sm-block align-items-center">
+                <div class="mb-0 heading-text">Receive Request ({{- table.total }})</div>
+                <form class="pf-table-action" action="">
+                    <div class="input-group align-items-center">
+                        <input class="form-control remove-focus" name="search" type="text" placeholder="Search"
+                               value="">
+                        <button class="btn btn-secondary  pf-icon-button" type="submit" title="Search">
+                             <i class="fas fa-search"></i>
+                        </button>
+                        <a class="btn btn-danger  pf-icon-button" title="Reload" href="#">
+                            <i class="fas fa-sync"></i>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="card">
+        <div class="card-body table-responsive-sm">
+            <table class="table table-bordered table-hover">
+                <thead class="table-secondary">
+                    <tr>
+                        {% sortable_header name="roll", display_name="Roll" %}
+                        {% sortable_header name="name", display_name="Name" %}
+                        {% sortable_header name="technology", display_name="Technology" %}
+                        {% sortable_header name="dataGroup", display_name="Type" %}
+                        {% sortable_header name="status", display_name="Status" %}
+                        <td class="table-action">Action</td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in table.items %}
+                    <tr>
+                        <td>{{ row.roll|default("", True) }}</td>
+                        <td>{{ row.name|default("", True) }}</td>
+                        <td>{{ row.technology|default("", True) }}</td>
+                        <td>{{ row.dataGroup|default("", True) }}</td>
+                        <td>{{ row.status }}</td>
+                        <td class="text-center">
+                            <div class="dropdown">
+                                <span data-bs-toggle="dropdown" aria-expanded="true" class="show">
+                                    <span class="text-black btn-sm cursor-pointer">
+                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    </span>
+                                </span>
+                                <ul class="dropdown-menu">
+                                    <li class=" dropdown-item">
+                                        <a href="{{- url_for("register_controller.process_request", id=row.id) }}">
+                                            <i class="fa-regular fa-eye pe-1"></i>
+                                            Process
+                                        </a>
+                                    </li>
+                                    <li class=" dropdown-item">
+                                        <a href="{{- url_for("register_controller.process_request", id=row.id) }}">
+                                            <i class="fa-solid fa-rotate-right"></i>
+                                            Resolve
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+            {% pagination current_page=table.page, total_page=table.pages %}
+        </div>
+    </div>
+{% endblock %}
