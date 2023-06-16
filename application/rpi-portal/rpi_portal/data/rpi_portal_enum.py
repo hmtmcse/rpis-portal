@@ -37,3 +37,15 @@ class BloodGroup(BaseEnum):
 class MemberStatus(BaseEnum):
     Pending = "Pending"
     Approved = "Approved"
+
+
+class MarkSheetStatus(BaseEnum):
+    NotReceived = "NotReceived"
+    Received = "Received"
+    Processing = "Processing"
+    NotFound = "NotFound"
+
+
+class DataGroupEnum(BaseEnum):
+    Sheet = "Sheet"
+    Certificate = "Certificate"

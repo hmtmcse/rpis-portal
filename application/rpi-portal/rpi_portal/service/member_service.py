@@ -301,4 +301,5 @@ class MemberService:
         query = Member.query.filter(and_(Member.accessType == MemberTypeEnum.Student.value, Member.isVerified == False, Member.status == MemberStatus.Pending.value))
         return self.form_crud_helper.form_paginated_list("register/registration-pending", search_fields=search_fields, response_def=MemberRegistrationForm(), query=query)
 
-
+    def get_student_by_roll(self, roll):
+        return Member.query.filter(and_(Member.roll == roll, Member.isDeleted == False)).first()

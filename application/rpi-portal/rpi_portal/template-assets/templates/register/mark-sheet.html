@@ -36,18 +36,20 @@
             <table class="table table-bordered table-hover">
                 <thead class="table-secondary">
                     <tr>
+                        {% sortable_header name="roll", display_name="Roll" %}
                         {% sortable_header name="name", display_name="Name" %}
-                        {% sortable_header name="mobile", display_name="Mobile" %}
-                        {% sortable_header name="accessType", display_name="Role" %}
+                        {% sortable_header name="technology", display_name="Technology" %}
+                        {% sortable_header name="status", display_name="Status" %}
                         <td class="table-action">Action</td>
                     </tr>
                 </thead>
                 <tbody>
                 {% for row in table.items %}
                     <tr>
+                        <td>{{ row.roll|default("", True) }}</td>
                         <td>{{ row.name|default("", True) }}</td>
-                        <td>{{ row.mobile|default("", True) }}</td>
-                        <td>{{ row.accessType }}</td>
+                        <td>{{ row.technology|default("", True) }}</td>
+                        <td>{{ row.status }}</td>
                         <td class="text-center">
                             <div class="dropdown">
                                 <span data-bs-toggle="dropdown" aria-expanded="true" class="show">

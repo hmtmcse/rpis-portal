@@ -1,16 +1,43 @@
+import csv
+import os.path
+from flask import redirect, url_for, flash
+from sqlalchemy import and_
+
 from pf_flask_file.pfff_file_upload_man import PFFFFileUploadMan
 from pf_flask_rest.helper.pf_flask_form_crud_helper import FormCRUDHelper
 from pf_flask_rest.pf_flask_request_processor import RequestProcessor
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor
+from rpi_portal.data.rpi_portal_enum import MarkSheetStatus, DataGroupEnum
 from rpi_portal.form.management_form import MarkSheetImportForm, CertificateImportForm
 from rpi_portal.model.academic_seba import AcademicSeba
+from rpi_portal.service.member_service import MemberService
 
 
 class ManagementService:
     request_processor = RequestProcessor()
     form_crud_helper = FormCRUDHelper(AcademicSeba, template_helper=TemplateProcessor())
     file_upload_man = PFFFFileUploadMan()
+    member_service = MemberService()
+
+    def get_mark_sheet_name(self, key):
+        if key == "1st":
+            return "First Semester"
+        elif key == "2nd":
+            return "Second Semester"
+        elif key == "3rd":
+            return "Third Semester"
+        elif key == "4th":
+            return "Fourth Semester"
+        elif key == "5th":
+            return "Fifth Semester"
+        elif key == "6th":
+            return "Six Semester"
+        elif key == "7th":
+            return "Seven Semester"
+        elif key == "8th":
+            return "Eight Semester"
+        return "Unknown"
 
     def import_mark_sheet(self):
         params = {}
@@ -18,7 +45,52 @@ class ManagementService:
         if form.is_post_request() and form.is_valid_data():
             files = self.request_processor.request_helper.file_data()
             uploaded_files = self.file_upload_man.validate_and_upload(files, form, RPIAssetsConfig.register, {"file": "uploaded-mark-sheet"})
-            print("--")
+            file_name = uploaded_files["file"]
+            file_path = os.path.join(RPIAssetsConfig.register, file_name)
+
+            if not file_name or not os.path.exists(file_path):
+                flash(f"Invalid file", "error")
+                return redirect(url_for("admin_controller.operator_list"))
+
+            with open(file_path, 'r') as csv_file:
+                csvreader = csv.reader(csv_file)
+                next(csvreader, None)
+                index = 2
+                for row in csvreader:
+                    if len(row) < 3:
+                        continue
+                    roll = row[0].strip()
+                    semester = row[1].strip()
+                    status = row[2].strip()
+
+                    if not roll or not semester:
+                        continue
+
+                    student = self.member_service.get_student_by_roll(roll)
+                    existing_entry: AcademicSeba = AcademicSeba.query.filter(and_(AcademicSeba.roll == roll, AcademicSeba.semester == semester, AcademicSeba.dataGroup == DataGroupEnum.Sheet.value)).first()
+                    if not existing_entry:
+                        existing_entry = AcademicSeba()
+
+                    if not existing_entry.status and not status:
+                        existing_entry.status = MarkSheetStatus.NotReceived.value
+                    elif not existing_entry.status and status:
+                        existing_entry.status = status
+
+                    existing_entry.name = self.get_mark_sheet_name(semester)
+                    existing_entry.semester = semester
+                    existing_entry.roll = roll
+                    existing_entry.dataGroup = DataGroupEnum.Sheet.value
+
+                    if student:
+                        existing_entry.technology = student.technology
+                        existing_entry.session = student.academicSession
+                        existing_entry.shift = student.shift
+                        existing_entry.registration = student.registration
+                        existing_entry.memberId = student.id
+
+                    existing_entry.save()
+                    index += 1
+
         return self.form_crud_helper.template_helper.render("register/mark-sheet-import", params=params, form=form)
 
     def import_certificate(self):
