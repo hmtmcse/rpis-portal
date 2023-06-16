@@ -98,12 +98,69 @@ class ManagementService:
     def import_certificate(self):
         params = {}
         form = CertificateImportForm()
+        if form.is_post_request() and form.is_valid_data():
+            files = self.request_processor.request_helper.file_data()
+            uploaded_files = self.file_upload_man.validate_and_upload(files, form, RPIAssetsConfig.register, {"file": "uploaded-certificate"})
+            file_name = uploaded_files["file"]
+            file_path = os.path.join(RPIAssetsConfig.register, file_name)
+
+            if not file_name or not os.path.exists(file_path):
+                flash(f"Invalid file", "error")
+                return redirect(url_for("register_controller.certificate"))
+
+            with open(file_path, 'r') as csv_file:
+                csvreader = csv.reader(csv_file)
+                next(csvreader, None)
+                index = 2
+                for row in csvreader:
+                    if len(row) < 3:
+                        continue
+                    roll = row[0].strip()
+                    certificate = row[1].strip()
+                    status = row[2].strip()
+
+                    if not roll or not certificate:
+                        continue
+
+                    student = self.member_service.get_student_by_roll(roll)
+                    existing_entry: AcademicSeba = AcademicSeba.query.filter(
+                        and_(AcademicSeba.roll == roll, AcademicSeba.name == certificate,
+                             AcademicSeba.dataGroup == DataGroupEnum.Certificate.value)).first()
+                    if not existing_entry:
+                        existing_entry = AcademicSeba()
+
+                    if not existing_entry.status and not status:
+                        existing_entry.status = MarkSheetStatus.NotReceived.value
+                    elif not existing_entry.status and status:
+                        existing_entry.status = status
+
+                    existing_entry.name = certificate
+                    existing_entry.roll = roll
+                    existing_entry.dataGroup = DataGroupEnum.Certificate.value
+
+                    if student:
+                        existing_entry.technology = student.technology
+                        existing_entry.session = student.academicSession
+                        existing_entry.shift = student.shift
+                        existing_entry.registration = student.registration
+                        existing_entry.memberId = student.id
+
+                    existing_entry.save()
+                    index += 1
+
+                flash(f"Successfully Imported", "success")
+                return redirect(url_for("register_controller.certificate"))
         return self.form_crud_helper.template_helper.render("register/certificate-import", params=params, form=form)
 
     def mark_sheet(self):
         search_fields = ["roll", "technology", "session", "name", "registration"]
         query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Sheet.value))
         return self.form_crud_helper.form_paginated_list("register/mark-sheet", search_fields=search_fields, query=query)
+
+    def certificate(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Certificate.value))
+        return self.form_crud_helper.form_paginated_list("register/certificate", search_fields=search_fields, query=query)
 
     def adjust_mark_sheet_mapping(self, member):
         my_mark_sheets = AcademicSeba.query.filter(and_(AcademicSeba.roll == member.roll, AcademicSeba.dataGroup == DataGroupEnum.Sheet.value, AcademicSeba.memberId == None)).all()

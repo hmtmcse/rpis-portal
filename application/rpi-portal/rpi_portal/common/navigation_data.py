@@ -29,7 +29,7 @@ class NavigationData:
             navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Registration", "fa-solid fa-rectangle-list"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "প্রত্যয়ন পত্র", "fa-solid fa-rectangle-list"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.mark_sheet", "Mark Sheet", "fa-solid fa-rectangle-list"))
-            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Certificate", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("register_controller.certificate", "Certificate", "fa-solid fa-rectangle-list"))
 
         navigation_list.append(NavigationData.get_nav_item("member_controller.profile", "Profile", "fa-brands fa-canadian-maple-leaf"))
         navigation_list.append(NavigationData.get_nav_item("member_controller.support", "Support", "fa-solid fa-headset"))

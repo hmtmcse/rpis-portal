@@ -1,5 +1,4 @@
 from flask import Blueprint
-
 from rpi_portal.service.management_service import ManagementService
 from rpi_portal.service.member_service import MemberService
 
@@ -34,7 +33,12 @@ def mark_sheet():
     return management_service.mark_sheet()
 
 
-@register_controller.route("/import-certificate", methods=['GET'])
+@register_controller.route("/certificate", methods=['GET'])
+def certificate():
+    return management_service.certificate()
+
+
+@register_controller.route("/import-certificate", methods=['GET', 'POST'])
 def import_certificate():
     return management_service.import_certificate()
 
