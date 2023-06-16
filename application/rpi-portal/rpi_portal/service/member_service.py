@@ -15,8 +15,9 @@ from pf_py_common.py_common import PyCommon
 from pf_py_common.py_data_util import PyDataUtil
 from region.service.city_service import CityService
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
+from rpi_portal.common.rpi_auth_util import RPIAuthUtil
 from rpi_portal.common.template_processor import TemplateProcessor, render
-from rpi_portal.data.rpi_portal_enum import MemberTypeEnum
+from rpi_portal.data.rpi_portal_enum import MemberTypeEnum, MemberStatus
 from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfileForm, ResetPasswordBySMSForm, \
     ChangePasswordForm, UploadProfileForm, ResetPasswordForm, OperatorDataDTO, OperatorCreateForm, OperatorUpdateForm
 from rpi_portal.model.member import Member
@@ -194,7 +195,8 @@ class MemberService:
 
     def profile(self, form=ChangePasswordForm()):
         profile_data = self.get_profile_data()
-        params = {"data": profile_data}
+        is_student = RPIAuthUtil.is_student()
+        params = {"data": profile_data, "is_student": is_student}
         return render("member/profile", params, form=form)
 
     def change_password(self):
@@ -222,18 +224,47 @@ class MemberService:
         form = OperatorCreateForm()
         action_url = url_for("admin_controller.operator_cu")
         is_edit = False
+        existing_model = None
         if id:
             button = "Update"
             form = OperatorUpdateForm()
             is_edit = True
             action_url = url_for("admin_controller.operator_cu", id=id)
+            existing_model = Member.query.filter(Member.id == id).first()
+            form.set_model_value(existing_model)
         params = {"button": button, "action": action_url, "is_edit": is_edit}
+        if form.is_post_request() and form.is_valid_data():
+            form_data = form.get_requested_data()
+            is_email_available = self._is_email_available(form_data, form=form, member_id=id)
+            is_username_and_mobile = self._is_username_and_mobile_num_available(form_data, form=form, member_id=id)
+            if is_username_and_mobile and is_email_available:
+                if existing_model:
+                    model = self.form_crud_helper.update(form_def=form, data=form_data, existing_model=existing_model)
+                else:
+                    model = self.form_crud_helper.save(form_def=form, data=form_data)
+                if model:
+                    flash(f"Operator {button}", "success")
+                    return redirect(url_for("admin_controller.operator_list"))
+            else:
+                flash("Please check the validation errors", "error")
         return self.form_crud_helper.template_helper.render("operator/operator-cu", params=params, form=form)
 
     def operator_list(self):
         search_fields = ["name", "email", "homeDistrict"]
         query = Member.query.filter(Member.accessType != MemberTypeEnum.Student.value)
         return self.form_crud_helper.form_paginated_list("operator/operator-list", search_fields=search_fields, response_def=OperatorDataDTO(), query=query)
+
+    def registration_approve(self, model_id: int):
+        existing_model = Member.query.filter(and_(Member.id == model_id, Member.isDeleted == False)).first()
+        if not existing_model:
+            flash("Invalid Student", "error")
+            return redirect(url_for("register_controller.registration_approval"))
+
+        existing_model.isVerified = True
+        existing_model.status = MemberStatus.Approved.value
+        existing_model.save()
+        flash(f"Approved", "success")
+        return redirect(url_for("register_controller.registration_approval"))
 
     def member_details(self, model_id: int):
         return self.form_crud_helper.form_details("member/member-details", model_id, url_for("admin_controller.student_list"), display_def=MemberRegistrationForm())
@@ -264,4 +295,10 @@ class MemberService:
                 redirect_url = url_for(success_url)
                 return redirect(redirect_url)
         return self.form_crud_helper.render_view(view_name="member/reset", form=form, params=params)
+
+    def pending_registration_list(self):
+        search_fields = ["name", "mobile", "roll", "registration"]
+        query = Member.query.filter(and_(Member.accessType == MemberTypeEnum.Student.value, Member.isVerified == False, Member.status == MemberStatus.Pending.value))
+        return self.form_crud_helper.form_paginated_list("register/registration-pending", search_fields=search_fields, response_def=MemberRegistrationForm(), query=query)
+
 

@@ -60,84 +60,87 @@
         </div>
 
         <div class="row g-0">
-            <div class="col-lg-8 pe-lg-2">
-                <div class="card mb-3">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0">Profile</h5>
-                        <a href="{{- url_for("member_controller.update_profile") }}" class="font-sans-serif">Edit</a>
-                    </div>
-                    <div class="card-body bg-light ">
-                        <div class="row g-2">
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.name }}</div>
-                                    <label class="details-label-fs">Name</label>
+            {% if is_student %}
+                <div class="col-lg-8 pe-lg-2">
+                    <div class="card mb-3">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Profile</h5>
+                            <a href="{{- url_for("member_controller.update_profile") }}"
+                               class="font-sans-serif">Edit</a>
+                        </div>
+                        <div class="card-body bg-light ">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.name }}</div>
+                                        <label class="details-label-fs">Name</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.homeDistrict }}</div>
-                                    <label class="details-label-fs">Home District</label>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.homeDistrict }}</div>
+                                        <label class="details-label-fs">Home District</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.mobile }}</div>
-                                    <label class="details-label-fs">Mobile</label>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.mobile }}</div>
+                                        <label class="details-label-fs">Mobile</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.email }}</div>
-                                    <label class="details-label-fs">Email</label>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.email }}</div>
+                                        <label class="details-label-fs">Email</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.emergencyContact }}</div>
-                                    <label class="details-label-fs">Emergency Contact</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.emergencyContact }}</div>
+                                        <label class="details-label-fs">Emergency Contact</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.bloodGroup }}</div>
-                                    <label class="details-label-fs">Blood Group</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.bloodGroup }}</div>
+                                        <label class="details-label-fs">Blood Group</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.technology }}</div>
-                                    <label class="details-label-fs">Technology</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.technology }}</div>
+                                        <label class="details-label-fs">Technology</label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.session }}</div>
-                                    <label class="details-label-fs">Session</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.session }}</div>
+                                        <label class="details-label-fs">Session</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.shift }}</div>
-                                    <label class="details-label-fs">Shift</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.shift }}</div>
+                                        <label class="details-label-fs">Shift</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-floating">
-                                    <div class="form-control fw-bold h-auto min-h-details">{{- data.passingYear }}</div>
-                                    <label class="details-label-fs">Passing Year</label>
+                                <div class="col-md-4">
+                                    <div class="form-floating">
+                                        <div class="form-control fw-bold h-auto min-h-details">{{- data.passingYear }}</div>
+                                        <label class="details-label-fs">Passing Year</label>
+                                    </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
+
                 </div>
+            {% endif %}
 
-            </div>
-
-            <div class="col-lg-4 ps-lg-2">
+            <div class="ps-lg-2 {{ "col-lg-4" if is_student else "col-lg-12" }}">
                 <div class="sticky-sidebar">
                     <div class="card mb-3">
                         <div class="card-header">

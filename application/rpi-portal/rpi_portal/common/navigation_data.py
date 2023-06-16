@@ -26,7 +26,10 @@ class NavigationData:
             navigation_list.append(NavigationData.get_nav_item("admin_controller.operator_list", "Operator", "fa-solid fa-rectangle-list"))
 
         if RPIAuthUtil.is_register():
-            navigation_list.append(NavigationData.get_nav_item("register_controller.student_list", "Student", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Registration", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "প্রত্যয়ন পত্র", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Mark Sheet", "fa-solid fa-rectangle-list"))
+            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Certificate", "fa-solid fa-rectangle-list"))
 
         navigation_list.append(NavigationData.get_nav_item("member_controller.profile", "Profile", "fa-brands fa-canadian-maple-leaf"))
         navigation_list.append(NavigationData.get_nav_item("member_controller.support", "Support", "fa-solid fa-headset"))

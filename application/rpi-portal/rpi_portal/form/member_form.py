@@ -72,13 +72,27 @@ class OperatorDataDTO(FormAppDef):
     name = fields.String(required=True, error_messages={"required": "Please enter name"})
     accessType = EnumField(MemberTypeEnum, required=True, error_messages={"required": "Please select Role"}, selectOptionLabel="value", selectFirstEntry="Role", label="Role")
     mobile = fields.String(required=True, error_messages={"required": "Please enter mobile"})
+    username = fields.String(allow_none=True)
+
+    @validates_schema
+    def validates_schema(self, data, **kwargs):
+        CommonHelper.enum_to_string(data, "accessType")
+        CommonValidation.validate_bd_mobile_email(data)
 
 
 class OperatorCreateForm(OperatorDataDTO):
+    class Meta:
+        model = Member
+        load_instance = True
+
     password = fields.String(required=True, error_messages={"required": "Please enter password"}, type="password")
 
 
 class OperatorUpdateForm(OperatorDataDTO):
+    class Meta:
+        model = Member
+        load_instance = True
+
     id = fields.Integer(required=True, error_messages={"required": "Please enter id"}, type="hidden", isIgnoreLabel=True)
 
 
