@@ -38,7 +38,7 @@
                         {% sortable_header name="technology", display_name="Technology" %}
                         {% sortable_header name="roll", display_name="Roll" %}
                         {% sortable_header name="registration", display_name="Registration" %}
-                        {% sortable_header name="session", display_name="Session" %}
+                        {% sortable_header name="academicSession", display_name="Session" %}
                         {% sortable_header name="shift", display_name="Shift" %}
                         <td class="table-action">Action</td>
                     </tr>
@@ -51,7 +51,7 @@
                         <td>{{ row.technology|default("", True) }}</td>
                         <td>{{ row.roll|default("", True) }}</td>
                         <td>{{ row.registration|default("", True) }}</td>
-                        <td>{{ row.session|default("", True) }}</td>
+                        <td>{{ row.academicSession|default("", True) }}</td>
                         <td>{{ row.shift|default("", True) }}</td>
                         <td class="text-center">
                             <div class="dropdown">

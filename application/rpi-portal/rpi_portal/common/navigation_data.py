@@ -27,7 +27,6 @@ class NavigationData:
 
         if RPIAuthUtil.is_register():
             navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "Registration", "fa-solid fa-file-circle-check"))
-            navigation_list.append(NavigationData.get_nav_item("register_controller.registration_approval", "প্রত্যয়ন পত্র", "fa-solid fa-file"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.mark_sheet", "Mark Sheet", "fa-solid fa-file-lines"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.certificate", "Certificate", "fa-solid fa-certificate"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.receive_request", "Receive Request", "fa-solid fa-bars-progress"))

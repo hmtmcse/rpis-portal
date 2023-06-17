@@ -1,4 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, redirect, url_for
+
+from rpi_portal.common.rpi_auth_util import RPIAuthUtil
 from rpi_portal.service.management_service import ManagementService
 from rpi_portal.service.member_service import MemberService
 
@@ -61,3 +63,9 @@ def process_request(id: int):
 @register_controller.route("/resolve-request/<int:id>", methods=['GET', 'POST'])
 def resolve_request(id: int):
     return management_service.resolve_request(id)
+
+
+@register_controller.before_request
+def check_member_role():
+    if not RPIAuthUtil.is_register():
+        return redirect(url_for("member_controller.dashboard"))
