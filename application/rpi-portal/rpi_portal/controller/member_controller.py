@@ -67,3 +67,13 @@ def send_mark_sheet_request(id: int):
 @member_controller.route("/receive-request-details/<int:id>", methods=['GET'])
 def receive_request_details(id: int):
     return management_service.receive_request_details(id)
+
+
+@member_controller.route("/attestation", methods=['GET'])
+def attestation():
+    return management_service.my_attestation()
+
+
+@member_controller.route("/apply-attestation", methods=['GET', 'POST'])
+def apply_attestation():
+    return management_service.apply_attestation()

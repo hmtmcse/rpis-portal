@@ -48,5 +48,6 @@ class MarkSheetStatus(BaseEnum):
 
 
 class DataGroupEnum(BaseEnum):
+    Attestation = "Attestation"
     Sheet = "Sheet"
     Certificate = "Certificate"

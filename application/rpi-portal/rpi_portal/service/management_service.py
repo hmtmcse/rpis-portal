@@ -267,3 +267,34 @@ class ManagementService:
         else:
             form.set_dict_value(form.dump(service))
         return self.form_crud_helper.template_helper.render("register/resolve-request", params=params, form=form)
+
+    def my_attestation(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        member = self.member_service.get_logged_in_member()
+        query = AcademicSeba.query.filter(and_(AcademicSeba.dataGroup == DataGroupEnum.Attestation.value, AcademicSeba.memberId == member.id))
+        return self.form_crud_helper.form_paginated_list("member/attestation", search_fields=search_fields, query=query)
+
+    def apply_attestation(self):
+        member = self.member_service.get_logged_in_member()
+        pending_attestation = AcademicSeba.query.filter(
+            and_(AcademicSeba.memberId == member.id, AcademicSeba.dataGroup == DataGroupEnum.Attestation.value,
+                 AcademicSeba.status != MarkSheetStatus.Received.value)).first()
+        if pending_attestation:
+            flash(f"There is a pending request", "error")
+            return redirect(url_for("member_controller.attestation"))
+        academic_seba = AcademicSeba()
+        academic_seba.status = MarkSheetStatus.ReceivedRequest.value
+        academic_seba.dataGroup = DataGroupEnum.Attestation.value
+        academic_seba.roll = member.roll
+        academic_seba.memberId = member.id
+        academic_seba.technology = member.technology
+        academic_seba.session = member.academicSession
+        academic_seba.shift = member.shift
+        academic_seba.registration = member.registration
+        academic_seba.name = "প্রত্যয়ন পত্র"
+        academic_seba.charge = 300
+        academic_seba.token = PyCommon.get_random_6digit()
+        academic_seba.requestDate = datetime.now()
+        academic_seba.save()
+        flash(f"Successfully send request", "success")
+        return redirect(url_for("member_controller.attestation"))

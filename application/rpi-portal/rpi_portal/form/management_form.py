@@ -15,6 +15,12 @@ class ProcessRequestForm(FormAppDef):
     token = fields.String(allow_none=True)
 
 
+class AttestationForm(FormAppDef):
+    class Meta:
+        model = AcademicSeba
+        load_instance = True
+
+
 class ResolveRequestForm(FormAppDef):
     class Meta:
         model = AcademicSeba
