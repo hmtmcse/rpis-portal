@@ -25,3 +25,7 @@ Tips = 3000
 Total = 168,800
 
 Extra cost = 213150
+
+
+UPDATE member SET is_verified = 1;
+UPDATE member SET access_type = 'Admin', is_verified = 1 WHERE id = 1;

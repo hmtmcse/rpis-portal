@@ -22,6 +22,7 @@ from rpi_portal.form.member_form import MemberRegistrationForm, MemberEditProfil
     ChangePasswordForm, UploadProfileForm, ResetPasswordForm, OperatorDataDTO, OperatorCreateForm, OperatorUpdateForm
 from rpi_portal.model.academic_seba import AcademicSeba
 from rpi_portal.model.member import Member
+from rpi_portal.service.sms_service import SMSService
 
 
 class MemberService:
@@ -31,6 +32,7 @@ class MemberService:
     file_upload_man = PFFFFileUploadMan()
     operator_form_service: OperatorFormService = OperatorFormService()
     operator_service = OperatorService()
+    sms_service = SMSService()
 
     def is_username_available(self, username: str, member_id=None):
         member = Member.query.filter(and_(Member.isDeleted == False, Member.username == username)).first()
@@ -102,6 +104,7 @@ class MemberService:
                 form_data["isVerified"] = False
                 model = self.form_crud_helper.save(form_def=form, data=form_data)
                 if model:
+                    self.sms_service.send_registration_request(member=model)
                     flash("Registration data received", "success")
                     return redirect(url_for("site_controller.registration_success"))
             else:
@@ -279,6 +282,7 @@ class MemberService:
         existing_model.isVerified = True
         existing_model.status = MemberStatus.Approved.value
         existing_model.save()
+        self.sms_service.send_registration_approve(member=existing_model)
         flash(f"Approved", "success")
         return redirect(url_for("register_controller.registration_approval"))
 

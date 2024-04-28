@@ -2,8 +2,6 @@ import json
 
 from sqlalchemy import Integer
 from sqlalchemy.dialects.mysql import LONGTEXT
-from kpi_reunion.data.kpi_reunio_enum import MemberTypeEnum
-from pf_flask_auth.model.pffa_abstract_model import OperatorAbstract
 from pf_flask_db.pf_app_model import AppModel
 from pf_flask_web.system12.pweb_db import pweb_db
 
