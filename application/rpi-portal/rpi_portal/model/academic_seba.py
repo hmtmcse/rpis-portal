@@ -17,6 +17,7 @@ class AcademicSeba(AppModel):
 
     name = pweb_db.Column("name", pweb_db.String(30), nullable=False)
     status = pweb_db.Column("status", pweb_db.String(15), nullable=False)
+    processingBy = pweb_db.Column("processing_by", pweb_db.String(40))
 
     identifier = pweb_db.Column("identifier", pweb_db.String(50))
     prove = pweb_db.Column("prove", pweb_db.String(250))
@@ -46,3 +47,10 @@ class AcademicSeba(AppModel):
     @additionalData.setter
     def additionalData(self, dataDict: dict):
         self.additionalDataJson = json.dumps(dataDict)
+
+    member = pweb_db.relationship(
+        "Member",
+        lazy="joined",
+        remote_side="Member.id",
+        primaryjoin="and_(AcademicSeba.memberId==Member.id, Member.isDeleted==False)", uselist=False)
+

@@ -4,13 +4,16 @@ from datetime import datetime
 
 from flask import redirect, url_for, flash
 from sqlalchemy import and_, or_
+
+from pf_flask_auth.common.pffa_auth_util import AuthUtil
+from pf_flask_auth.data.pffa_form_auth_data import FormAuthData
 from pf_flask_file.pfff_file_upload_man import PFFFFileUploadMan
 from pf_flask_rest.helper.pf_flask_form_crud_helper import FormCRUDHelper
 from pf_flask_rest.pf_flask_request_processor import RequestProcessor
 from pf_py_common.py_common import PyCommon
 from rpi_portal.common.rpi_assets_config import RPIAssetsConfig
 from rpi_portal.common.template_processor import TemplateProcessor
-from rpi_portal.data.rpi_portal_enum import MarkSheetStatus, DataGroupEnum
+from rpi_portal.data.rpi_portal_enum import MarkSheetStatus, DataGroupEnum, MemberTypeEnum
 from rpi_portal.form.management_form import MarkSheetImportForm, CertificateImportForm, ProcessRequestForm, \
     ResolveRequestForm
 from rpi_portal.model.academic_seba import AcademicSeba
@@ -221,8 +224,22 @@ class ManagementService:
 
     def receive_request(self):
         search_fields = ["roll", "technology", "session", "name", "registration"]
-        query = AcademicSeba.query.filter(or_(AcademicSeba.status == MarkSheetStatus.ReceivedRequest.value, AcademicSeba.status == MarkSheetStatus.Processing.value))
+        query = AcademicSeba.query.filter(or_(
+            AcademicSeba.processingBy == MemberTypeEnum.Register.value,
+            AcademicSeba.status == MarkSheetStatus.PrincipleApproved.value,
+        ))
         return self.form_crud_helper.form_paginated_list("register/receive-request", search_fields=search_fields, query=query)
+
+    def receive_request_by_principle(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        query = AcademicSeba.query.filter(or_(AcademicSeba.processingBy == MemberTypeEnum.Principle.value))
+        return self.form_crud_helper.form_paginated_list("principle/receive-request", search_fields=search_fields, query=query)
+
+    def receive_request_by_department(self):
+        search_fields = ["roll", "technology", "session", "name", "registration"]
+        form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
+        query = AcademicSeba.query.filter(or_(AcademicSeba.processingBy == MemberTypeEnum.Department.value), and_(AcademicSeba.technology == form_auth_data.otherFields["technology"]))
+        return self.form_crud_helper.form_paginated_list("department/receive-request", search_fields=search_fields, query=query)
 
     def process_request(self, model_id):
         form = ProcessRequestForm()
@@ -283,7 +300,7 @@ class ManagementService:
             flash(f"There is a pending request", "error")
             return redirect(url_for("member_controller.attestation"))
         academic_seba = AcademicSeba()
-        academic_seba.status = MarkSheetStatus.ReceivedRequest.value
+        academic_seba.status = MarkSheetStatus.PaymentPending.value
         academic_seba.dataGroup = DataGroupEnum.Attestation.value
         academic_seba.roll = member.roll
         academic_seba.memberId = member.id
@@ -295,6 +312,41 @@ class ManagementService:
         academic_seba.charge = 300
         academic_seba.token = PyCommon.get_random_6digit()
         academic_seba.requestDate = datetime.now()
+        academic_seba.processingBy = MemberTypeEnum.Register.value
         academic_seba.save()
         flash(f"Successfully send request", "success")
         return redirect(url_for("member_controller.attestation"))
+
+    def pass_to_department(self, id):
+        return self.attestation_pass_to(id=id, processing_by=MemberTypeEnum.Department.value, redirect_url="register_controller.receive_request")
+
+    def pass_to_principle(self, id):
+        return self.attestation_pass_to(id=id, processing_by=MemberTypeEnum.Principle.value, redirect_url="department_controller.receive_request")
+
+    def attestation_pass_to(self, id, processing_by, redirect_url):
+        service = self.get_service_by_id(id)
+        if not service:
+            flash(f"Invalid request", "error")
+            return redirect(url_for(redirect_url))
+        service.processingBy = processing_by
+        service.save()
+        flash(f"Send Request to {processing_by}", "success")
+        return redirect(url_for(redirect_url))
+
+    def attestation_details(self, id, redirect_url):
+        service = self.get_service_by_id(id)
+        if not service:
+            flash(f"Invalid request", "error")
+            return redirect(url_for(redirect_url))
+        return self.form_crud_helper.render_view(view_name="member/attestation-details", params={"data": service, "redirect_url": redirect_url})
+
+    def approved(self, id):
+        service = self.get_service_by_id(id)
+        if not service:
+            flash(f"Invalid request", "error")
+            return redirect(url_for("principle_controller.receive_request"))
+        service.status = MarkSheetStatus.PrincipleApproved.value
+        service.processingBy = MemberTypeEnum.Register.value
+        service.save()
+        flash(f"Approved", "success")
+        return redirect(url_for("principle_controller.receive_request"))

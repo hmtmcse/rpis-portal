@@ -42,6 +42,7 @@
                         {% sortable_header name="paid", display_name="Paid" %}
                         {% sortable_header name="token", display_name="Payment Ref" %}
                         {% sortable_header name="status", display_name="Status" %}
+                        {% sortable_header name="processingBy", display_name="Processor" %}
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,7 @@
                         <td>{{ row.paid|default("", True) }}</td>
                         <td>{{ row.token|default("", True) }}</td>
                         <td>{{ row.status }}</td>
+                        <td>{{ row.processingBy }}</td>
                     </tr>
                   {% endfor %}
                 </tbody>

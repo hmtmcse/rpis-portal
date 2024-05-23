@@ -10,7 +10,8 @@ class ProcessRequestForm(FormAppDef):
         model = AcademicSeba
         load_instance = True
 
-    appointmentDate = fields.Date(required=True, format="%d/%m/%Y", label="Appointment Date", inputAttrClass="add-datepicker", attributes="autocomplete='off'")
+    # appointmentDate = fields.Date(required=True, format="%d/%m/%Y", label="Appointment Date", inputAttrClass="add-datepicker", attributes="autocomplete='off'")
+    paid = fields.String(required=True)
     response = fields.String(allow_none=True, type="textarea")
     token = fields.String(allow_none=True)
 

@@ -55,6 +55,16 @@ def receive_request():
     return management_service.receive_request()
 
 
+@register_controller.route("/pass-to-department/<int:id>", methods=['GET'])
+def pass_to_department(id: int):
+    return management_service.pass_to_department(id)
+
+
+@register_controller.route("/attestation-details/<int:id>", methods=['GET'])
+def attestation_details(id: int):
+    return management_service.attestation_details(id, redirect_url="register_controller.receive_request")
+
+
 @register_controller.route("/process-request/<int:id>", methods=['GET', 'POST'])
 def process_request(id: int):
     return management_service.process_request(id)

@@ -1,0 +1,91 @@
+{% extends "layout/base.html" %}
+
+{% block title %}
+   Attestation Details | Rangpur Polytechnic Institute
+{% endblock %}
+
+
+{% block content %}
+    <div class="pt-3 pb-2 mb-2 border-bottom">
+        <div class="text-h4">Student Details</div>
+    </div>
+
+     <div class="card">
+        <div class="card-body">
+            <div class="row g-2">
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.name }}</div>
+                        <label class="details-label-fs">Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.homeDistrict }}</div>
+                        <label class="details-label-fs">Home District</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.mobile }}</div>
+                        <label class="details-label-fs">Mobile</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.email }}</div>
+                        <label class="details-label-fs">Email</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.emergencyContact }}</div>
+                        <label class="details-label-fs">Emergency Contact</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.bloodGroup }}</div>
+                        <label class="details-label-fs">Blood Group</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.technology }}</div>
+                        <label class="details-label-fs">Technology</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.session }}</div>
+                        <label class="details-label-fs">Session</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.shift }}</div>
+                        <label class="details-label-fs">Shift</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-floating">
+                        <div class="form-control fw-bold h-auto min-h-details">{{- data.member.passingYear }}</div>
+                        <label class="details-label-fs">Passing Year</label>
+                    </div>
+                </div>
+
+
+                <div class="col-12 mt-3">
+                    <span class="float-end">
+                        <a href="{{- url_for(redirect_url) }}" class="btn btn-danger ms-2">Cancel</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+     </div>
+
+{% endblock %}

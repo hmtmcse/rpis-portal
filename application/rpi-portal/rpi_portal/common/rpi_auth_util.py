@@ -26,3 +26,11 @@ class RPIAuthUtil:
     @staticmethod
     def is_register():
         return RPIAuthUtil.is_role(MemberTypeEnum.Register.value)
+
+    @staticmethod
+    def is_principle():
+        return RPIAuthUtil.is_role(MemberTypeEnum.Principle.value)
+
+    @staticmethod
+    def is_department():
+        return RPIAuthUtil.is_role(MemberTypeEnum.Department.value)

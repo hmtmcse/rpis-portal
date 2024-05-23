@@ -38,6 +38,11 @@ class TemplateUtil:
         return form_auth_data.name
 
     @property
+    def role(self):
+        form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
+        return form_auth_data.otherFields["accessType"]
+
+    @property
     def qr_code_image(self):
         form_auth_data: FormAuthData = AuthUtil.get_ssr_auth_data()
         file_name = form_auth_data.uuid + ".png"

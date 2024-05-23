@@ -57,36 +57,20 @@
                                     </span>
                                 </span>
                                 <ul class="dropdown-menu">
-                                    {% if row.paid and row.paid >= row.charge and row.status != "Principle Approved" %}
+                                    {% if row.paid and row.paid >= row.charge %}
                                         <li class=" dropdown-item">
-                                            <a href="{{- url_for("register_controller.pass_to_department", id=row.id) }}">
-                                                <i class="fa-solid fa-gear pe-1"></i>
-                                                Pass to Department
+                                            <a href="{{- url_for("department_controller.pass_to_principle", id=row.id) }}">
+                                                <i class="fa-solid fa-square-check pe-1"></i>
+                                                Pass to Principle
                                             </a>
                                         </li>
                                     {% endif %}
                                     <li class=" dropdown-item">
-                                        <a href="{{- url_for("register_controller.attestation_details", id=row.id) }}">
+                                        <a href="{{- url_for("department_controller.attestation_details", id=row.id) }}">
                                             <i class="fa-solid fa-gear pe-1"></i>
                                             Details
                                         </a>
                                     </li>
-                                    <li class=" dropdown-item">
-                                        <a href="{{- url_for("register_controller.process_request", id=row.id) }}">
-                                            <i class="fa-solid fa-gear pe-1"></i>
-                                            Process
-                                        </a>
-                                    </li>
-
-                                    {% if row.status == "Principle Approved" %}
-                                        <li class=" dropdown-item">
-                                            <a href="{{- url_for("register_controller.resolve_request", id=row.id) }}">
-                                                <i class="fa-solid fa-square-check pe-1"></i>
-                                                Resolve
-                                            </a>
-                                        </li>
-                                    {% endif %}
-
                                 </ul>
                             </div>
                         </td>

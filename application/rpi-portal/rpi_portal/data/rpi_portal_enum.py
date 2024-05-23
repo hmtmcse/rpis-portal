@@ -5,6 +5,8 @@ class MemberTypeEnum(BaseEnum):
     Admin = "Admin"
     Student = "Student"
     Register = "Register"
+    Department = "Department"
+    Principle = "Principle"
     RegisterAssistant = "RegisterAssistant"
 
 
@@ -42,8 +44,10 @@ class MemberStatus(BaseEnum):
 class MarkSheetStatus(BaseEnum):
     NotReceived = "NotReceived"
     Received = "Received"
-    ReceivedRequest = "ReceivedRequest"
+    ReceivedRequest = "Received Request"
+    PaymentPending = "Payment Pending"
     Processing = "Processing"
+    PrincipleApproved = "Principle Approved"
     NotFound = "NotFound"
 
 

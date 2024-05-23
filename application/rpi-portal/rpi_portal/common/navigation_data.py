@@ -31,6 +31,12 @@ class NavigationData:
             navigation_list.append(NavigationData.get_nav_item("register_controller.certificate", "Certificate", "fa-solid fa-certificate"))
             navigation_list.append(NavigationData.get_nav_item("register_controller.receive_request", "Receive Request", "fa-solid fa-bars-progress"))
 
+        if RPIAuthUtil.is_principle():
+            navigation_list.append(NavigationData.get_nav_item("principle_controller.receive_request", "Receive Request", "fa-solid fa-bars-progress"))
+
+        if RPIAuthUtil.is_department():
+            navigation_list.append(NavigationData.get_nav_item("department_controller.receive_request", "Receive Request", "fa-solid fa-bars-progress"))
+
         navigation_list.append(NavigationData.get_nav_item("member_controller.profile", "Profile", "fa-brands fa-canadian-maple-leaf"))
         navigation_list.append(NavigationData.get_nav_item("member_controller.support", "Support", "fa-solid fa-headset"))
 
